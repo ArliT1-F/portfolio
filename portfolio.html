@@ -1,1 +1,1212 @@
+<!DOCTYPE html>
 
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arli Turka — Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  /* ============================================================
+     CSS CUSTOM PROPERTIES
+  ============================================================ */
+  :root {
+    --bg:        #080808;
+    --surface:   #0f0f0f;
+    --border:    #1e1e1e;
+    --border-hi: #2e2e2e;
+    --text:      #e8e8e8;
+    --muted:     #555;
+    --dim:       #333;
+    --accent:    #c8ff00;       /* electric lime — the one pop of colour */
+    --accent-dim:#8ab300;
+    --github:    #f0f6fc;
+    --instagram: #e1306c;
+    --gmail:     #ea4335;
+    --mono: 'Space Mono', monospace;
+    --sans: 'Syne', sans-serif;
+  }
+
+  /* ============================================================
+     RESET & BASE
+  ============================================================ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    overflow-x: hidden;
+    cursor: none;        /* custom cursor active */
+  }
+
+  ::selection { background: var(--accent); color: #000; }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ============================================================
+     CUSTOM CURSOR
+  ============================================================ */
+  #cursor-dot, #cursor-ring {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: opacity .3s;
+  }
+  #cursor-dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    transform: translate(-50%, -50%);
+  }
+  #cursor-ring {
+    width: 30px; height: 30px;
+    border: 1px solid var(--accent);
+    transform: translate(-50%, -50%);
+    transition: width .2s, height .2s, border-color .2s;
+    opacity: .5;
+  }
+  body:has(a:hover) #cursor-ring,
+  body:has(button:hover) #cursor-ring {
+    width: 44px; height: 44px;
+    border-color: var(--accent);
+    opacity: 1;
+  }
+
+  /* ============================================================
+     NOISE OVERLAY
+  ============================================================ */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: .025;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* ============================================================
+     LAYOUT
+  ============================================================ */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  section { padding: 120px 0; }
+
+  /* ============================================================
+     ANIMATED GRID BACKGROUND
+  ============================================================ */
+  .grid-bg {
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: .35;
+    pointer-events: none;
+    z-index: 0;
+    animation: grid-drift 30s linear infinite;
+  }
+  @keyframes grid-drift {
+    from { background-position: 0 0; }
+    to   { background-position: 60px 60px; }
+  }
+
+  /* ============================================================
+     NAV
+  ============================================================ */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 500;
+    padding: 20px 0;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid transparent;
+    transition: border-color .4s;
+  }
+  nav.scrolled { border-color: var(--border); }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: .8rem;
+    color: var(--accent);
+    letter-spacing: .08em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: .72rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color .2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .25s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  /* ============================================================
+     HERO
+  ============================================================ */
+  #hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: .7rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    animation: fade-up .6s .2s forwards;
+  }
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 30px; height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-name {
+    font-family: var(--sans);
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 800;
+    line-height: .95;
+    letter-spacing: -.02em;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fade-up .7s .35s forwards;
+  }
+  .hero-name span { color: var(--accent); }
+
+  .hero-subtitle {
+    font-family: var(--mono);
+    font-size: .85rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 480px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fade-up .7s .5s forwards;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: #000;
+    font-family: var(--mono);
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    border: none;
+    cursor: none;
+    transition: background .2s, transform .2s;
+    opacity: 0;
+    animation: fade-up .7s .65s forwards;
+  }
+  .hero-cta:hover {
+    background: #fff;
+    transform: translateY(-2px);
+  }
+  .hero-cta svg { transition: transform .2s; }
+  .hero-cta:hover svg { transform: translateX(4px); }
+
+  /* ---- profile picture block ---- */
+  .hero-avatar {
+    position: relative;
+    opacity: 0;
+    animation: fade-in .8s .5s forwards;
+  }
+
+  /*
+  ================================================================
+  PROFILE PICTURE INSTRUCTIONS
+  ================================================================
+  The <img id="pfp"> below displays your profile picture.
+
+  HOW TO REPLACE THE PLACEHOLDER:
+    1. Set the src attribute to your image path:
+       e.g.  src="./my-photo.jpg"
+       or    src="https://yoursite.com/photo.jpg"
+
+  DESIRED DISPLAY SIZE: 220px × 220px (circular crop).
+  The CSS handles the circular crop automatically.
+
+  IF YOUR PHOTO IS A DIFFERENT SIZE:
+    The image is set to object-fit: cover, so it will
+    automatically crop and fill the circle regardless of
+    the original dimensions. Any square or portrait image
+    will work fine. Wide landscape shots may need manual
+    cropping to focus on your face first.
+
+  RECOMMENDED SOURCE DIMENSIONS: at least 400×400px
+  for crisp display on high-DPI screens.
+  ================================================================
+  */
+  .avatar-frame {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid var(--border-hi);
+    position: relative;
+    z-index: 1;
+  }
+  .avatar-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* auto-crops to fill the circle */
+    object-position: center top; /* favour face area; adjust if needed */
+    display: block;
+    filter: grayscale(20%);
+    transition: filter .3s;
+  }
+  .avatar-frame img:hover { filter: grayscale(0%); }
+
+  /* decorative ring */
+  .avatar-ring {
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+    border: 1px dashed var(--dim);
+    animation: spin-slow 20s linear infinite;
+  }
+  /* accent dot on the ring */
+  .avatar-ring::after {
+    content: '';
+    position: absolute;
+    top: 10px; left: 50%;
+    transform: translateX(-50%);
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  @keyframes spin-slow { to { transform: rotate(360deg); } }
+
+  /* ============================================================
+     ABOUT
+  ============================================================ */
+  #about { position: relative; z-index: 1; }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-hi);
+    max-width: 300px;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-family: var(--sans);
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.85;
+    color: #aaa;
+    margin-bottom: 24px;
+  }
+  .about-text p:last-child { margin-bottom: 0; }
+
+  .about-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 6px;
+  }
+
+  .stack-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    transition: border-color .2s, transform .2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .stack-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform .25s;
+  }
+  .stack-item:hover { border-color: var(--border-hi); transform: translateX(4px); }
+  .stack-item:hover::before { transform: scaleY(1); }
+
+  .stack-icon {
+    font-size: 1.2rem;
+    width: 36px;
+    text-align: center;
+  }
+
+  .stack-info { flex: 1; }
+  .stack-name {
+    font-family: var(--mono);
+    font-size: .78rem;
+    letter-spacing: .05em;
+    margin-bottom: 3px;
+  }
+  .stack-role {
+    font-family: var(--mono);
+    font-size: .65rem;
+    color: var(--muted);
+    letter-spacing: .05em;
+  }
+
+  /* ============================================================
+     PROJECTS
+  ============================================================ */
+  #projects { position: relative; z-index: 1; }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .project-card {
+    background: var(--surface);
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: background .25s;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .project-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--accent) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  .project-card:hover { background: #111; }
+  .project-card:hover::after { opacity: .04; }
+
+  .project-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .project-index {
+    font-family: var(--mono);
+    font-size: .6rem;
+    color: var(--dim);
+    letter-spacing: .1em;
+    margin-bottom: 10px;
+  }
+
+  .project-name {
+    font-family: var(--sans);
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    transition: color .2s;
+  }
+  .project-card:hover .project-name { color: var(--accent); }
+
+  .project-arrow {
+    flex-shrink: 0;
+    width: 36px; height: 36px;
+    border: 1px solid var(--border-hi);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s, border-color .2s, transform .2s;
+  }
+  .project-card:hover .project-arrow {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: translate(2px, -2px);
+  }
+  .project-card:hover .project-arrow svg { stroke: #000; }
+
+  .project-desc {
+    font-family: var(--mono);
+    font-size: .72rem;
+    line-height: 1.75;
+    color: var(--muted);
+    flex: 1;
+  }
+
+  /* repo snippet */
+  .repo-snippet {
+    border: 1px solid var(--border);
+    background: var(--bg);
+    padding: 14px 16px;
+    margin-top: auto;
+  }
+
+  .repo-snippet-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .repo-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .repo-snippet-name {
+    font-family: var(--mono);
+    font-size: .65rem;
+    color: #888;
+    letter-spacing: .05em;
+  }
+
+  .repo-lang {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: .6rem;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .lang-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+
+  .repo-stats {
+    display: flex;
+    gap: 14px;
+  }
+  .repo-stat {
+    font-family: var(--mono);
+    font-size: .6rem;
+    color: var(--dim);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* ============================================================
+     SOCIAL / CONTACT
+  ============================================================ */
+  #contact { position: relative; z-index: 1; }
+
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .social-card {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    overflow: hidden;
+    transition: border-color .25s, transform .25s;
+    position: relative;
+  }
+  .social-card:hover { transform: translateY(-4px); }
+
+  /* ---------- card header bar (platform-coloured) ---------- */
+  .social-bar {
+    height: 3px;
+    width: 100%;
+  }
+
+  /* ---------- card body ---------- */
+  .social-body {
+    padding: 24px;
+  }
+
+  .social-platform {
+    font-family: var(--mono);
+    font-size: .62rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .social-profile {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  /* ================================================================
+     SOCIAL PROFILE PICTURES
+     Each social card has its own circular avatar.
+
+     TO REPLACE PLACEHOLDERS:
+       Find the <img class="social-pfp" id="pfp-github"> (or -instagram/-gmail)
+       and set its src to your profile picture URL or local path.
+
+     SIZE: displayed at 42×42px (circular). Any square image works.
+     If linking to your actual GitHub/Instagram avatar URL, that's ideal.
+
+     Example GitHub avatar URL pattern:
+       https://avatars.githubusercontent.com/u/YOUR_GITHUB_USER_ID
+
+     For Gmail / Instagram you can use any hosted image URL.
+  ================================================================ */
+  .social-pfp {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    flex-shrink: 0;
+    border: 1px solid var(--border-hi);
+  }
+
+  .social-info { flex: 1; min-width: 0; }
+  .social-name {
+    font-family: var(--sans);
+    font-size: .95rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .social-handle {
+    font-family: var(--mono);
+    font-size: .65rem;
+    color: var(--muted);
+  }
+
+  /* ---------- Visit buttons — each styled to the platform ---------- */
+  .visit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 16px;
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    cursor: none;
+    border: none;
+    transition: opacity .2s, transform .15s;
+    text-decoration: none;
+  }
+  .visit-btn:hover { opacity: .88; transform: translateY(-1px); }
+
+  /* GitHub */
+  .btn-github  { background: #24292f; color: #f0f6fc; }
+  .social-card.card-github:hover { border-color: #444; }
+
+  /* Instagram */
+  .btn-instagram {
+    background: linear-gradient(90deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color: #fff;
+  }
+  .social-card.card-instagram:hover { border-color: #e1306c55; }
+
+  /* Gmail */
+  .btn-gmail { background: #ea4335; color: #fff; }
+  .social-card.card-gmail:hover { border-color: #ea433555; }
+
+  /* ============================================================
+     FOOTER
+  ============================================================ */
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 40px 0;
+  }
+
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .footer-left {
+    font-family: var(--mono);
+    font-size: .65rem;
+    color: var(--dim);
+    letter-spacing: .08em;
+  }
+  .footer-left span { color: var(--accent); }
+
+  .footer-right {
+    font-family: var(--mono);
+    font-size: .65rem;
+    color: var(--dim);
+    letter-spacing: .08em;
+  }
+
+  /* ============================================================
+     SCROLL REVEAL
+  ============================================================ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .65s, transform .65s;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: .1s; }
+  .reveal-delay-2 { transition-delay: .2s; }
+  .reveal-delay-3 { transition-delay: .3s; }
+
+  /* ============================================================
+     KEYFRAMES
+  ============================================================ */
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ============================================================
+     SCANLINE ACCENT (decorative, hero only)
+  ============================================================ */
+  .scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(0,0,0,.07) 3px,
+      rgba(0,0,0,.07) 4px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ============================================================
+     RESPONSIVE
+  ============================================================ */
+  @media (max-width: 900px) {
+    .hero-inner    { grid-template-columns: 1fr; }
+    .hero-avatar   { display: none; }
+    .about-grid    { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .social-grid   { grid-template-columns: 1fr; }
+    .nav-links     { display: none; }
+  }
+
+  @media (max-width: 640px) {
+    .container { padding: 0 20px; }
+    section    { padding: 80px 0; }
+    .hero-name { font-size: 3rem; }
+  }
+</style>
+
+</head>
+<body>
+
+<!-- custom cursor -->
+
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- animated grid -->
+
+<div class="grid-bg"></div>
+
+<!-- ============================================================
+     NAVIGATION
+============================================================ -->
+
+<nav id="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">AT://</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+
+<section id="hero">
+  <div class="scanlines"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-tag">Available for collaboration</div>
+        <h1 class="hero-name">Arli<br><span>Turka</span></h1>
+        <p class="hero-subtitle">
+          Systems programmer &amp; full-stack builder.<br>
+          C · Python · Low-level to high-level.
+        </p>
+        <a href="#projects" class="hero-cta">
+          View Projects
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+```
+  <!-- PROFILE PICTURE — see CSS comment above for replacement instructions -->
+  <div class="hero-avatar">
+    <div class="avatar-ring"></div>
+    <div class="avatar-frame">
+      <!--
+        REPLACE THIS SRC TO SET YOUR PROFILE PICTURE.
+        Recommended: square image, minimum 400×400px.
+        The CSS will automatically crop it to a 220×220 circle.
+        object-position is set to "center top" to prioritise
+        the face area of portrait photos — adjust if needed.
+      -->
+      <img id="pfp"
+           src="https://placehold.co/400x400/111/555?text=AT"
+           alt="Arli Turka">
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT
+============================================================ -->
+
+<section id="about">
+  <div class="container">
+    <div class="section-label">About</div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I build software across the stack—from low-level systems code to high-level scripting—focusing on performance, control, and understanding how things actually work.</p>
+        <p>I use C to implement core logic and performance-critical components, and Python to prototype, experiment, and build tools quickly. This combination lets me move fast without losing visibility into what's happening under the hood.</p>
+        <p>My projects are often exploratory, driven by curiosity and a preference for building things from first principles—whether that means implementing algorithms, experimenting with system behaviour, or creating lightweight tools that stay simple and efficient.</p>
+      </div>
+
+```
+  <div class="about-stack">
+    <div class="stack-item reveal reveal-delay-1">
+      <div class="stack-icon">⚙️</div>
+      <div class="stack-info">
+        <div class="stack-name">C</div>
+        <div class="stack-role">Core logic · Performance-critical systems</div>
+      </div>
+    </div>
+    <div class="stack-item reveal reveal-delay-2">
+      <div class="stack-icon">🐍</div>
+      <div class="stack-info">
+        <div class="stack-name">Python</div>
+        <div class="stack-role">Prototyping · Tooling · Rapid experimentation</div>
+      </div>
+    </div>
+    <div class="stack-item reveal reveal-delay-3">
+      <div class="stack-icon">🌐</div>
+      <div class="stack-info">
+        <div class="stack-name">Web</div>
+        <div class="stack-role">Frontend interfaces · Browser tooling</div>
+      </div>
+    </div>
+    <div class="stack-item reveal reveal-delay-3">
+      <div class="stack-icon">🔬</div>
+      <div class="stack-info">
+        <div class="stack-name">PyTorch</div>
+        <div class="stack-role">Tensor ops · Spatial data · ML experiments</div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ============================================================
+     PROJECTS
+============================================================ -->
+
+<section id="projects">
+  <div class="container">
+    <div class="section-label">Projects</div>
+    <div class="projects-grid">
+
+```
+  <!-- web-tool -->
+  <a href="https://github.com/ArliT1-F/web-tool" target="_blank" rel="noopener" class="project-card reveal">
+    <div>
+      <div class="project-index">01 /</div>
+      <div class="project-header">
+        <div class="project-name">web-tool</div>
+        <div class="project-arrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2">
+            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <p class="project-desc">A lightweight browser-based tool suite that consolidates multiple utilities into a single, accessible interface. Designed with a focus on simplicity and responsiveness, it enables quick interactions without unnecessary overhead, emphasizing usability and clean integration between frontend logic and functionality.</p>
+    <div class="repo-snippet">
+      <div class="repo-snippet-top">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#666"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        <span class="repo-snippet-name">ArliT1-F / web-tool</span>
+        <div class="repo-lang">
+          <div class="lang-dot" style="background:#f1e05a"></div>
+          JavaScript
+        </div>
+      </div>
+      <div class="repo-stats">
+        <span class="repo-stat">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Stars
+        </span>
+        <span class="repo-stat">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 5C7 3.89543 7.89543 3 9 3C10.1046 3 11 3.89543 11 5C11 5.74028 10.5978 6.38663 10 6.73244V14.0396H13.0189C13.2758 13.0794 14.1504 12.375 15.1875 12.375C16.4301 12.375 17.4375 13.3824 17.4375 14.625C17.4375 15.8676 16.4301 16.875 15.1875 16.875C14.1285 16.875 13.2393 16.1433 12.9998 15.1575H8.875C8.46079 15.1575 8.125 14.8217 8.125 14.4075V6.73244C7.52222 6.38663 7 5.74028 7 5Z"/></svg>
+          Fork
+        </span>
+      </div>
+    </div>
+  </a>
+
+  <!-- torch2grid -->
+  <a href="https://github.com/ArliT1-F/torch2grid" target="_blank" rel="noopener" class="project-card reveal reveal-delay-1">
+    <div>
+      <div class="project-index">02 /</div>
+      <div class="project-header">
+        <div class="project-name">torch2grid</div>
+        <div class="project-arrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2">
+            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <p class="project-desc">A PyTorch-based utility for transforming and structuring tensor data into grid representations. Built to support experimentation with spatial data and tensor manipulation, it focuses on efficient handling of multi-dimensional data and bridging low-level tensor operations with practical workflows.</p>
+    <div class="repo-snippet">
+      <div class="repo-snippet-top">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#666"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        <span class="repo-snippet-name">ArliT1-F / torch2grid</span>
+        <div class="repo-lang">
+          <div class="lang-dot" style="background:#3572A5"></div>
+          Python
+        </div>
+      </div>
+      <div class="repo-stats">
+        <span class="repo-stat">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Stars
+        </span>
+        <span class="repo-stat">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 5C7 3.89543 7.89543 3 9 3C10.1046 3 11 3.89543 11 5C11 5.74028 10.5978 6.38663 10 6.73244V14.0396H13.0189C13.2758 13.0794 14.1504 12.375 15.1875 12.375C16.4301 12.375 17.4375 13.3824 17.4375 14.625C17.4375 15.8676 16.4301 16.875 15.1875 16.875C14.1285 16.875 13.2393 16.1433 12.9998 15.1575H8.875C8.46079 15.1575 8.125 14.8217 8.125 14.4075V6.73244C7.52222 6.38663 7 5.74028 7 5Z"/></svg>
+          Fork
+        </span>
+      </div>
+    </div>
+  </a>
+
+  <!-- quantflow -->
+  <a href="https://github.com/ArliT1-F/quantflow" target="_blank" rel="noopener" class="project-card reveal reveal-delay-2">
+    <div>
+      <div class="project-index">03 /</div>
+      <div class="project-header">
+        <div class="project-name">quantflow</div>
+        <div class="project-arrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2">
+            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <p class="project-desc">An experimental project centred around modelling and managing quantitative data flows. It explores structured pipelines for transforming and processing numerical data, with an emphasis on modularity, clarity, and scalable design concepts.</p>
+    <div class="repo-snippet">
+      <div class="repo-snippet-top">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#666"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        <span class="repo-snippet-name">ArliT1-F / quantflow</span>
+        <div class="repo-lang">
+          <div class="lang-dot" style="background:#3572A5"></div>
+          Python
+        </div>
+      </div>
+      <div class="repo-stats">
+        <span class="repo-stat">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Stars
+        </span>
+        <span class="repo-stat">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 5C7 3.89543 7.89543 3 9 3C10.1046 3 11 3.89543 11 5C11 5.74028 10.5978 6.38663 10 6.73244V14.0396H13.0189C13.2758 13.0794 14.1504 12.375 15.1875 12.375C16.4301 12.375 17.4375 13.3824 17.4375 14.625C17.4375 15.8676 16.4301 16.875 15.1875 16.875C14.1285 16.875 13.2393 16.1433 12.9998 15.1575H8.875C8.46079 15.1575 8.125 14.8217 8.125 14.4075V6.73244C7.52222 6.38663 7 5.74028 7 5Z"/></svg>
+          Fork
+        </span>
+      </div>
+    </div>
+  </a>
+
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT / SOCIAL
+============================================================ -->
+
+<section id="contact">
+  <div class="container">
+    <div class="section-label">Connect</div>
+    <div class="social-grid">
+
+```
+  <!-- GitHub -->
+  <div class="social-card card-github reveal">
+    <div class="social-bar" style="background:#444;"></div>
+    <div class="social-body">
+      <div class="social-platform">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="#888"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        GitHub
+      </div>
+      <div class="social-profile">
+        <!--
+          GITHUB AVATAR: Replace src with your GitHub avatar.
+          Fastest method: https://avatars.githubusercontent.com/ArliT1-F
+          Displayed at 42×42px circular crop.
+        -->
+        <img class="social-pfp" id="pfp-github"
+             src="https://placehold.co/84x84/1a1a1a/666?text=AT"
+             alt="GitHub avatar">
+        <div class="social-info">
+          <div class="social-name">Arli Turka</div>
+          <div class="social-handle">@ArliT1-F</div>
+        </div>
+      </div>
+      <a href="https://github.com/ArliT1-F" target="_blank" rel="noopener" class="visit-btn btn-github">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        View on GitHub
+      </a>
+    </div>
+  </div>
+
+  <!-- Instagram -->
+  <div class="social-card card-instagram reveal reveal-delay-1">
+    <div class="social-bar" style="background: linear-gradient(90deg,#f09433,#dc2743,#bc1888);"></div>
+    <div class="social-body">
+      <div class="social-platform" style="color:#e1306c;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="#e1306c"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </div>
+      <div class="social-profile">
+        <!--
+          INSTAGRAM AVATAR: Replace src with your Instagram profile picture URL.
+          Displayed at 42×42px circular crop.
+        -->
+        <img class="social-pfp" id="pfp-instagram"
+             src="https://placehold.co/84x84/1a0a10/993355?text=AT"
+             alt="Instagram avatar">
+        <div class="social-info">
+          <div class="social-name">Arli Turka</div>
+          <div class="social-handle">@a.tu2001</div>
+        </div>
+      </div>
+      <a href="https://instagram.com/a.tu2001" target="_blank" rel="noopener" class="visit-btn btn-instagram">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Follow on Instagram
+      </a>
+    </div>
+  </div>
+
+  <!-- Gmail -->
+  <div class="social-card card-gmail reveal reveal-delay-2">
+    <div class="social-bar" style="background:#ea4335;"></div>
+    <div class="social-body">
+      <div class="social-platform" style="color:#ea4335;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="#ea4335"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+        Gmail
+      </div>
+      <div class="social-profile">
+        <!--
+          GMAIL AVATAR: Replace src with a photo or your Google profile picture URL.
+          Displayed at 42×42px circular crop.
+        -->
+        <img class="social-pfp" id="pfp-gmail"
+             src="https://placehold.co/84x84/1a0a08/993322?text=AT"
+             alt="Gmail avatar">
+        <div class="social-info">
+          <div class="social-name">Arli Turka</div>
+          <div class="social-handle">arliturka@gmail.com</div>
+        </div>
+      </div>
+      <a href="mailto:arliturka@gmail.com" class="visit-btn btn-gmail">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+        Send Email
+      </a>
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">© 2025 <span>Arli Turka</span>. Built from scratch.</div>
+    <div class="footer-right">AT://portfolio</div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+
+<script>
+  /* ----- Custom cursor ----- */
+  const dot  = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top  = my + 'px';
+  });
+
+  (function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animRing);
+  })();
+
+  /* ----- Nav scroll state ----- */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  /* ----- Scroll reveal ----- */
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer  = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealEls.forEach(el => observer.observe(el));
+
+  /* ----- Glitch text effect on name ----- */
+  const heroName = document.querySelector('.hero-name');
+  if (heroName) {
+    heroName.addEventListener('mouseenter', () => {
+      heroName.style.animation = 'none';
+      let i = 0;
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%';
+      const original = ['A','r','l','i','T','u','r','k','a'];
+      const flatText = heroName.querySelectorAll
+        ? null : null;
+
+      // subtle accent flicker
+      heroName.style.textShadow = `0 0 30px rgba(200,255,0,0.3)`;
+      setTimeout(() => { heroName.style.textShadow = ''; }, 400);
+    });
+  }
+</script>
+
+</body>
+</html>
