@@ -78,6 +78,14 @@
     opacity: 1;
   }
 
+  #particles {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.75;
+  }
+
   /* ============================================================
      NOISE OVERLAY
   ============================================================ */
@@ -785,6 +793,16 @@
     section    { padding: 80px 0; }
     .hero-name { font-size: 3rem; }
   }
+
+  .s.skill-bar { margin-bottom: 32px; }
+.skill-info { display: flex; justify-content: space-between; margin-bottom: 8px; font-family: 'Space Mono', monospace; font-size: 0.78rem; }
+.bar-bg { height: 6px; background: var(--border); border-radius: 999px; overflow: hidden; }
+.bar-fill { 
+    height: 100%; 
+    background: linear-gradient(90deg, var(--accent), #fff); 
+    width: 0%; 
+    transition: width 1.6s cubic-bezier(0.34, 1.56, 0.64, 1); 
+}
 </style>
 
 </head>
@@ -819,26 +837,21 @@
 ============================================================ -->
 
 <section id="hero">
+  <canvas id="particles"></canvas>
   <div class="scanlines"></div>
   <div class="container">
     <div class="hero-inner">
       <div class="hero-content">
-        <div class="hero-tag">Available for collaboration</div>
+        <div class="hero-tag">Avaliable for collaboration</div>
         <h1 class="hero-name">Arli<br><span>Turka</span></h1>
         <p class="hero-subtitle">
           Systems programmer &amp; full-stack builder.<br>
-          C · Python · Low-level to high-level.
+          C · Python · Low-level systems · ML tooling 
         </p>
-        <br>
-        <p class="hero-subtitle">
-          I enjoy coding to make my life easier—and maybe, in some way, help others too. Passionate about building solutions that automate tasks, improve workflows, or simply add a little convenience to everyday life.
-        </p>
-        <a href="#projects" class="hero-cta">
-          View Projects
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 20px;">
+          <a href = "https://github.com/ArliT1-F?tab=repositories" class="hero-cta">View Projects</a>
+          <a href="https://github.com/ArliT1-F/" target="_blank" class="hero-cta" style="background: transparent; color: var(--accent); border: 1px solid var(--accent);">GitHub</a>
+        </div>
       </div>
 
 ```
@@ -912,6 +925,45 @@
 </div>
 ```
 
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SKILLS SECTION
+============================================================ -->
+
+<section id="skills">
+  <div class="container">
+    <div class="section-label">Skills</div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 60px;">
+      
+      <div>
+        <div class="skill-bar">
+          <div class="skill-info"><span>C / Systems Programming</span><span>95%</span></div>
+          <div class="bar-bg"><div class="bar-fill" data-width="95"></div></div>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-info"><span>Python</span><span>92%</span></div>
+          <div class="bar-bg"><div class="bar-fill" data-width="92"></div></div>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-info"><span>PyTorch</span><span>80%</span></div>
+          <div class="bar-bg"><div class="bar-fill" data-width="80"></div></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="skill-bar">
+          <div class="skill-info"><span>Web Development</span><span>75%</span></div>
+          <div class="bar-bg"><div class="bar-fill" data-width="75"></div></div>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-info"><span>Automation &amp; Tooling</span><span>90%</span></div>
+          <div class="bar-bg"><div class="bar-fill" data-width="90"></div></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1210,6 +1262,62 @@
       setTimeout(() => { heroName.style.textShadow = ''; }, 400);
     });
   }
+
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContex('2d');
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight
+  }
+
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  let particles = [];
+  class Particle {
+    constructor() {
+      thix.x = Math.random() * canvas.width;
+      this.speedX = Math.random() * 0.6 - 0.3;
+      this.size = Math.random() * 2.2 + 0.5;
+    }
+    update() {
+      this.x += this.speedX;
+      if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+    }
+    draw() {
+      ctx.fillStyle = '#c8ff00';
+      ctx.globalAlpha = 0.4;
+      ctx.fillRect(this.x, this.size, this.size)
+    }
+  }
+
+  for (let i = 0; i < 160; i++) {
+    particles.push(new Particle());
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    requestAnimationFrame(animateParticles);
+  }
+
+  animateParticles();
+
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.querySelectorAll('.bar-fill').forEach(bar => {
+                bar.style.width = bar.dataset.width + '%';
+            });
+        }
+    });
+}, { threshold: 0.4 });
+
+skillObserver.observe(document.getElementById('skills'));
 </script>
 
 </body>
