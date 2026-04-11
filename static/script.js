@@ -18,6 +18,7 @@ document.addEventListener('mousemove', e => {
   }
 });
  
+/*
 (function animRing() {
   rx += (mx - rx) * 0.12;
   ry += (my - ry) * 0.12;
@@ -25,7 +26,10 @@ document.addEventListener('mousemove', e => {
   ring.style.top  = ry + 'px';
   requestAnimationFrame(animRing);
 })();
- 
+*/
+
+
+
 /* ============================================================
    NAV SCROLL STATE
 ============================================================ */
@@ -138,13 +142,13 @@ class Fragment {
     this.x       = Math.random() * kataCanvas.width;
     this.y       = Math.random() * kataCanvas.height;
     this.size    = Math.random() * 18 + 11;
-    this.speed   = Math.random() * 0.6 + 0.3;
+    this.speed   = Math.random() * 0.25 + 0.1;
     this.text    = katakanaChars[Math.floor(Math.random() * katakanaChars.length)];
-    this.opacity = Math.random() * 0.6 + 0.3;
+    this.opacity = Math.random() * 0.25 + 0.15;
   }
   update() {
     this.y      += this.speed;
-    this.opacity = Math.sin(Date.now() / 1200) * 0.3 + 0.6;
+    this.opacity = 0.2 + Math.sin(Date.now() / 2000) * 0.1;
     if (this.y > kataCanvas.height) this.y = -30;
   }
   draw() {
@@ -160,7 +164,7 @@ class Fragment {
 }
  
 const fragments = [];
-for (let i = 0; i < 45; i++) fragments.push(new Fragment());
+for (let i = 0; i < 18; i++) fragments.push(new Fragment());
  
 /* ============================================================
    O3. PAUSE CANVAS ANIMATIONS when tab is hidden
@@ -186,8 +190,43 @@ function animateKata() {
   requestAnimationFrame(animateKata);
 }
  
-animateParticles();
-animateKata();
+/*
+(function animRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
+  requestAnimationFrame(animRing);
+})();
+*/
+
+function loop() {
+  if (!animPaused) {
+
+    // cursor ring
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';;
+
+    // particles
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+
+    // katakana
+    kataCtx.clearRect(0, 0, kataCanvas.width, kataCanvas.height);
+    fragments.forEach(f => {
+      f.update();
+      f.draw();
+    });
+  }
+
+  requestAnimationFrame(loop);
+}
+loop();
  
 /* ============================================================
    A4. SPLASH SCREEN
@@ -232,7 +271,7 @@ if (subtitleEl) {
       }
     }
   }
-  setTimeout(type, 1800); // start after splash clears
+  setTimeout(type, 300); // start after splash clears
 }
  
 /* ============================================================
@@ -288,24 +327,37 @@ document.querySelectorAll('.lazy-bg').forEach(el => {
 /* ============================================================
    P1. LIVE GITHUB STARS + FORKS
 ============================================================ */
-const starSVG = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
-const forkSVG = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 5C7 3.89543 7.89543 3 9 3C10.1046 3 11 3.89543 11 5C11 5.74028 10.5978 6.38663 10 6.73244V14.0396H13.0189C13.2758 13.0794 14.1504 12.375 15.1875 12.375C16.4301 12.375 17.4375 13.3824 17.4375 14.625C17.4375 15.8676 16.4301 16.875 15.1875 16.875C14.1285 16.875 13.2393 16.1433 12.9998 15.1575H8.875C8.46079 15.1575 8.125 14.8217 8.125 14.4075V6.73244C7.52222 6.38663 7 5.74028 7 5Z"/></svg>`;
- 
+function renderStats(cardIndex, data) {
+    const snippets = document.querySelectorAll('.repo-stats');
+    if (!snippets[cardIndex]) return;
+
+    const stats = snippets[cardIndex].querySelectorAll('.repo-stat');
+
+    if (stats[0]) stats[0].innerHTML = `${starSVG} ${data.stargazers_count ?? 0}`;
+  if (stats[1]) stats[1].innerHTML = `${forkSVG} ${data.forks_count ?? 0}`;
+}
+
 [
-  { slug: 'ArliT1-F/web-tool',   card: 0 },
-  { slug: 'ArliT1-F/torch2grid', card: 1 },
-  { slug: 'ArliT1-F/quantflow',  card: 2 },
+    { slug: 'ArliT1-F/web-tool', card: 0 },
+    { slug: 'ArliT1-F/terminal-portfolio', card: 1 },
+    { slug: 'ArliT1-F/desktop-portfolio', card: 2 },
 ].forEach(({ slug, card }) => {
-  fetch(`https://api.github.com/repos/${slug}`)
-    .then(r => r.json())
-    .then(data => {
-      const snippets = document.querySelectorAll('.repo-stats');
-      if (!snippets[card]) return;
-      const stats = snippets[card].querySelectorAll('.repo-stat');
-      if (stats[0]) stats[0].innerHTML = `${starSVG} ${data.stargazers_count ?? 0}`;
-      if (stats[1]) stats[1].innerHTML = `${forkSVG} ${data.forks_count ?? 0}`;
-    })
-    .catch(() => {});
+    const cacheKey = `repo_${slug}`;
+    const cached = localStorage.getItem(cacheKey);
+
+    if (cached) {
+        renderStats(card, JSON.parse(cached));
+        return;
+    }
+
+    fetch(`https://api.github.com/repos/${slug}`)
+        .then(r => r.json())
+        .then(data => {
+            if (!data || data.message) return;
+            localStorage.setItem(cacheKey, JSON.stringify(data));
+            renderStats(card, data);
+        })
+        .catch(() => {});
 });
  
 /* ============================================================
@@ -323,7 +375,7 @@ if (contactForm) {
     status.style.color = 'var(--muted)';
     btn.disabled = true;
  
-    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', contactForm)
+    emailjs.sendForm('service_i4vsvd1', 'template_bflokzn', contactForm)
       .then(() => {
         status.textContent = '✓ Message sent!';
         status.style.color = 'var(--accent)';
