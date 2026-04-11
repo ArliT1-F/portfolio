@@ -389,7 +389,43 @@ if (contactForm) {
       });
   });
 }
- 
+
+/* TODO
+1. emailjs.init('YOUR_PUBLIC_KEY');
+2. function validateForm(form) {
+  const name  = form.querySelector('[name="name"]').value.trim();
+  const email = form.querySelector('[name="email"]').value.trim();
+  const msg   = form.querySelector('[name="message"]').value.trim();
+
+  if (!name || !email || !msg) return 'All fields required.';
+  if (!/^\S+@\S+\.\S+$/.test(email)) return 'Invalid email.';
+  if (msg.length < 10) return 'Message too short.';
+  return null;
+}
+3. const error = validateForm(contactForm);
+if (error) {
+  status.textContent = error;
+  status.style.color = '#ff4444';
+  return;
+}
+4. let lastSent = 0;
+
+contactForm.addEventListener('submit', e => {
+  e.preventDefault();
+
+  if (Date.now() - lastSent < 15000) {
+    status.textContent = 'Wait before sending again.';
+    return;
+  }
+
+  lastSent = Date.now();
+  ...
+});
+5. .catch(err => {
+  console.error(err);
+  status.textContent = 'Error — try again later.';
+});
+*/
 /* ============================================================
    P3. COPY EMAIL BUTTON
 ============================================================ */
