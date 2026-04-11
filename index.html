@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      
+ 
   <!-- Title & Meta Description -->
   <title>Arli Turka | Systems Programmer &amp; Full-Stack Builder</title>
   <meta name="description" content="Arli Turka - Systems programmer specializing in C, Python, low-level systems, PyTorch, and automation tools. Building fast, minimal, and practical software.">
-      
+ 
   <!-- Basic SEO -->
   <meta name="keywords" content="Arli Turka, systems programmer, C developer, Python developer, PyTorch, low-level programming, automation, quantflow">
   <meta name="author" content="Arli Turka">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://ArliT1-F.github.io/portfolio">
-
+ 
   <!-- Open Graph / Social -->
   <meta property="og:title" content="Arli Turka | Systems Programmer &amp; Full-Stack Builder">
   <meta property="og:description" content="Systems programmer specializing in C, Python, low-level systems, PyTorch, and automation tools.">
@@ -22,1171 +21,67 @@
   <meta property="og:url" content="https://ArliT1-F.github.io/portfolio">
   <meta property="og:image" content="https://avatars.githubusercontent.com/ArliT1-F">
   <meta property="og:site_name" content="Arli Turka Portfolio">
-
+ 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Arli Turka | Systems Programmer">
   <meta name="twitter:description" content="C · Python · Low-level systems · PyTorch · Automation">
-
+ 
   <!-- Favicon -->
   <link rel="icon" href="https://avatars.githubusercontent.com/ArliT1-F" type="image/png">
   <link rel="apple-touch-icon" href="https://avatars.githubusercontent.com/ArliT1-F">
-
-  <!-- Fonts -->
+ 
+  <!-- Fonts — loaded once, here only -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
+ 
+  <!-- Structured data -->
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Arli Turka",
-      "url": "https://arliT1-F.github.io/portfolio",
-      "jobTitle": "Systems Programmer",
-      "description": "Systems programmer specializing in C, Python, low-level systems, and PyTorch/ML tooling.",
-      "knowsAbout": ["C", "Python", "PyTorch", "Low-level Programming", "Automation", "Web Development"],
-      "sameAs": [
-        "https://github.com/ArliT1-F",
-        "https://instagram.com/a.tu2001"
-      ]
-    }
-</script>
-</head>
-<title>Arli Turka // Portfolio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-  /* ============================================================
-     CSS CUSTOM PROPERTIES
-  ============================================================ */
-  :root {
-    --bg:        #080808;
-    --surface:   #0f0f0f;
-    --border:    #1e1e1e;
-    --border-hi: #2e2e2e;
-    --text:      #e8e8e8;
-    --muted:     #555;
-    --dim:       #333;
-    --accent:    #c8ff00;       /* electric lime — the one pop of colour */
-    --accent-dim:#8ab300;
-    --github:    #f0f6fc;
-    --instagram: #e1306c;
-    --gmail:     #ea4335;
-    --mono: 'Space Mono', monospace;
-    --sans: 'Syne', sans-serif;
-  }
-
-  /* ============================================================
-     RESET & BASE
-  ============================================================ */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    overflow-x: hidden;
-    cursor: none;        /* custom cursor active */
-  }
-
-  ::selection { background: var(--accent); color: #000; }
-
-  a { color: inherit; text-decoration: none; }
-
-  /* ============================================================
-     CUSTOM CURSOR
-  ============================================================ */
-  #cursor-dot, #cursor-ring {
-    position: fixed;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transition: opacity .3s;
-  }
-  #cursor-dot {
-    width: 6px; height: 6px;
-    background: var(--accent);
-    transform: translate(-50%, -50%);
-  }
-  #cursor-ring {
-    width: 30px; height: 30px;
-    border: 1px solid var(--accent);
-    transform: translate(-50%, -50%);
-    transition: width .2s, height .2s, border-color .2s;
-    opacity: .5;
-  }
-  body:has(a:hover) #cursor-ring,
-  body:has(button:hover) #cursor-ring {
-    width: 44px; height: 44px;
-    border-color: var(--accent);
-    opacity: 1;
-  }
-
-  #particles {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0.75;
-  }
-
-  /* ============================================================
-     NOISE OVERLAY
-  ============================================================ */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-    opacity: .025;
-    pointer-events: none;
-    z-index: 1000;
-  }
-
-  /* ============================================================
-     LAYOUT
-  ============================================================ */
-  .container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 32px;
-  }
-
-  section { padding: 120px 0; }
-
-  /* ============================================================
-     ANIMATED GRID BACKGROUND
-  ============================================================ */
-  .grid-bg {
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(var(--border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 60px 60px;
-    opacity: .35;
-    pointer-events: none;
-    z-index: 0;
-    animation: grid-drift 30s linear infinite;
-  }
-  @keyframes grid-drift {
-    from { background-position: 0 0; }
-    to   { background-position: 60px 60px; }
-  }
-
-  /* ============================================================
-     NAV
-  ============================================================ */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 500;
-    padding: 20px 0;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid transparent;
-    transition: border-color .4s;
-  }
-  nav.scrolled { border-color: var(--border); }
-
-  .nav-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 32px;
-  }
-
-  .nav-logo {
-    font-family: var(--mono);
-    font-size: .8rem;
-    color: var(--accent);
-    letter-spacing: .08em;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 36px;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-family: var(--mono);
-    font-size: .72rem;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    transition: color .2s;
-    position: relative;
-  }
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px; left: 0; right: 0;
-    height: 1px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform .25s;
-  }
-  .nav-links a:hover { color: var(--text); }
-  .nav-links a:hover::after { transform: scaleX(1); }
-
-  /* ============================================================
-     HERO
-  ============================================================ */
-  #hero {
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding-top: 80px;
-  }
-
-  .hero-inner {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 60px;
-    align-items: center;
-    width: 100%;
-  }
-
-  .hero-tag {
-    font-family: var(--mono);
-    font-size: .7rem;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 28px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    opacity: 0;
-    animation: fade-up .6s .2s forwards;
-  }
-  .hero-tag::before {
-    content: '';
-    display: block;
-    width: 30px; height: 1px;
-    background: var(--accent);
-  }
-
-  .hero-name {
-    font-family: var(--sans);
-    font-size: clamp(3.5rem, 8vw, 7rem);
-    font-weight: 800;
-    line-height: .95;
-    letter-spacing: -.02em;
-    margin-bottom: 32px;
-    opacity: 0;
-    animation: fade-up .7s .35s forwards;
-    position: relative;
-    color: var(--text);
-    cursor: default;
-    user-select: none;
-  }
-
-  .hero-name span { color: var(--accent); }
-
-  .hero-name::before,
-  .hero-name::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-  }
-
-  .hero-name::before {
-    color: #ff00ff;
-    left: 4px;
-    text-shadow: -4px 0 #00ffff;
-    animation: glitch-top 0.4s infinite linear alternate-reverse;
-    clip: rect(0, 9999px, 0, 0);
-  }
-
-  .hero-name::after {
-    color: #00ffff;
-    left: -4px;
-    text-shadow: 4px 0 #ff00ff;
-    animation: glitch-bottom 0.35s infinite linear alternate-reverse;
-    clip: rect(0, 9999px, 0, 0);
-  }
-
-  .hero-name:hover::before,
-  .hero-name:hover::after {
-    opacity: 0.95;
-    animation-duration: 120ms;
-  }
-
-  .hero-name:hover {
-  text-shadow: 
-    0 0 30px var(--accent),
-    0 0 60px var(--accent),
-    0 0 90px rgba(200,255,0,0.8);
-  }
-
-  @keyframes glitch-top {
-  0%    { clip: rect(10px, 9999px, 50px, 0); transform: skew(1deg); }
-  10%   { clip: rect(60px, 9999px, 95px, 0); transform: skew(-2deg); }
-  20%   { clip: rect(25px, 9999px, 70px, 0); transform: skew(3deg); }
-  30%   { clip: rect(45px, 9999px, 85px, 0); transform: skew(-1deg); }
-  40%   { clip: rect(15px, 9999px, 55px, 0); transform: skew(2deg); }
-  100%  { clip: rect(35px, 9999px, 80px, 0); transform: skew(0deg); }
-  }
-
-  @keyframes glitch-bottom {
-  0%    { clip: rect(40px, 9999px, 85px, 0); transform: skew(-2deg); }
-  15%   { clip: rect(5px, 9999px, 40px, 0); transform: skew(3deg); }
-  25%   { clip: rect(55px, 9999px, 90px, 0); transform: skew(-1deg); }
-  40%   { clip: rect(20px, 9999px, 65px, 0); transform: skew(2deg); }
-  100%  { clip: rect(50px, 9999px, 75px, 0); transform: skew(0deg); }
-  }
-
-  .hero-subtitle {
-    font-family: var(--mono);
-    font-size: .85rem;
-    color: var(--muted);
-    line-height: 1.7;
-    max-width: 480px;
-    margin-bottom: 48px;
-    opacity: 0;
-    animation: fade-up .7s .5s forwards;
-  }
-
-  .hero-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--accent);
-    color: #000;
-    font-family: var(--mono);
-    font-size: .75rem;
-    font-weight: 700;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    padding: 14px 28px;
-    border: none;
-    cursor: none;
-    transition: background .2s, transform .2s;
-    opacity: 0;
-    animation: fade-up .7s .65s forwards;
-  }
-  .hero-cta:hover {
-    background: #fff;
-    transform: translateY(-2px);
-  }
-  .hero-cta svg { transition: transform .2s; }
-  .hero-cta:hover svg { transform: translateX(4px); }
-
-  /* ---- profile picture block ---- */
-  .hero-avatar {
-    position: relative;
-    opacity: 0;
-    animation: fade-in .8s .5s forwards;
-  }
-
-  /* Hamburger Menu */
-.hamburger {
-  display: none;
-  font-size: 1.8rem;
-  color: var(--accent);
-  cursor: none;
-  padding: 8px;
-}
-
-@media (max-width: 900px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--bg);
-    padding: 20px;
-    border-top: 1px solid var(--border);
-    gap: 20px;
-  }
-  .nav-links.active { display: flex; }
-  .hamburger { display: block; }
-}
-
-  /*
-  ================================================================
-  PROFILE PICTURE INSTRUCTIONS
-  ================================================================
-  The <img id="pfp"> below displays your profile picture.
-
-  HOW TO REPLACE THE PLACEHOLDER:
-    1. Set the src attribute to your image path:
-       e.g.  src="./my-photo.jpg"
-       or    src="https://yoursite.com/photo.jpg"
-
-  DESIRED DISPLAY SIZE: 220px × 220px (circular crop).
-  The CSS handles the circular crop automatically.
-
-  IF YOUR PHOTO IS A DIFFERENT SIZE:
-    The image is set to object-fit: cover, so it will
-    automatically crop and fill the circle regardless of
-    the original dimensions. Any square or portrait image
-    will work fine. Wide landscape shots may need manual
-    cropping to focus on your face first.
-
-  RECOMMENDED SOURCE DIMENSIONS: at least 400×400px
-  for crisp display on high-DPI screens.
-  ================================================================
-  */
-  .avatar-frame {
-    width: 220px;
-    height: 220px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 1px solid var(--border-hi);
-    position: relative;
-    z-index: 1;
-  }
-  .avatar-frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;   /* auto-crops to fill the circle */
-    object-position: center top; /* favour face area; adjust if needed */
-    display: block;
-    filter: grayscale(20%);
-    transition: filter .3s;
-  }
-  .avatar-frame img:hover { filter: grayscale(0%); }
-
-  /* decorative ring */
-  .avatar-ring {
-    position: absolute;
-    inset: -12px;
-    border-radius: 50%;
-    border: 1px dashed var(--dim);
-    animation: spin-slow 20s linear infinite;
-  }
-  /* accent dot on the ring */
-  .avatar-ring::after {
-    content: '';
-    position: absolute;
-    top: 10px; left: 50%;
-    transform: translateX(-50%);
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: var(--accent);
-  }
-  @keyframes spin-slow { to { transform: rotate(360deg); } }
-
-  /* ============================================================
-     ABOUT
-  ============================================================ */
-  #about { position: relative; z-index: 1; }
-
-  .section-label {
-    font-family: var(--mono);
-    font-size: .68rem;
-    letter-spacing: .25em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 48px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border-hi);
-    max-width: 300px;
-  }
-
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: start;
-  }
-
-  .about-text p {
-    font-family: var(--sans);
-    font-size: 1.05rem;
-    font-weight: 400;
-    line-height: 1.85;
-    color: #aaa;
-    margin-bottom: 24px;
-  }
-  .about-text p:last-child { margin-bottom: 0; }
-
-  .about-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding-top: 6px;
-  }
-
-  .stack-item {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 18px 20px;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    transition: border-color .2s, transform .2s;
-    position: relative;
-    overflow: hidden;
-  }
-  .stack-item::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 2px;
-    background: var(--accent);
-    transform: scaleY(0);
-    transform-origin: bottom;
-    transition: transform .25s;
-  }
-  .stack-item:hover { border-color: var(--border-hi); transform: translateX(4px); }
-  .stack-item:hover::before { transform: scaleY(1); }
-
-  .stack-icon {
-    font-size: 1.2rem;
-    width: 36px;
-    text-align: center;
-  }
-
-  .stack-info { flex: 1; }
-  .stack-name {
-    font-family: var(--mono);
-    font-size: .78rem;
-    letter-spacing: .05em;
-    margin-bottom: 3px;
-  }
-  .stack-role {
-    font-family: var(--mono);
-    font-size: .65rem;
-    color: var(--muted);
-    letter-spacing: .05em;
-  }
-
-  /* ============================================================
-     PROJECTS
-  ============================================================ */
-  #projects { position: relative; z-index: 1; }
-
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-  }
-
-  .project-card {
-    background: var(--surface);
-    padding: 36px 32px;
-    position: relative;
-    overflow: hidden;
-    transition: background .25s;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  .project-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, var(--accent) 0%, transparent 60%);
-    opacity: 0;
-    transition: opacity .3s;
-  }
-  .project-card:hover { background: #111; }
-  .project-card:hover::after { opacity: .04; }
-
-  .project-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 12px;
-  }
-
-  .project-index {
-    font-family: var(--mono);
-    font-size: .6rem;
-    color: var(--dim);
-    letter-spacing: .1em;
-    margin-bottom: 10px;
-  }
-
-  .project-name {
-    font-family: var(--sans);
-    font-size: 1.3rem;
-    font-weight: 700;
-    letter-spacing: -.01em;
-    transition: color .2s;
-  }
-  .project-card:hover .project-name { color: var(--accent); }
-
-  .project-arrow {
-    flex-shrink: 0;
-    width: 36px; height: 36px;
-    border: 1px solid var(--border-hi);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background .2s, border-color .2s, transform .2s;
-  }
-  .project-card:hover .project-arrow {
-    background: var(--accent);
-    border-color: var(--accent);
-    transform: translate(2px, -2px);
-  }
-  .project-card:hover .project-arrow svg { stroke: #000; }
-
-  .project-desc {
-    font-family: var(--mono);
-    font-size: .72rem;
-    line-height: 1.75;
-    color: var(--muted);
-    flex: 1;
-  }
-
-  /* repo snippet */
-  .repo-snippet {
-    border: 1px solid var(--border);
-    background: var(--bg);
-    padding: 14px 16px;
-    margin-top: auto;
-  }
-
-  .repo-snippet-top {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-  .repo-dot { width: 10px; height: 10px; border-radius: 50%; }
-  .repo-snippet-name {
-    font-family: var(--mono);
-    font-size: .65rem;
-    color: #888;
-    letter-spacing: .05em;
-  }
-
-  .repo-lang {
-    margin-left: auto;
-    font-family: var(--mono);
-    font-size: .6rem;
-    color: var(--muted);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .lang-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-  }
-
-  .repo-stats {
-    display: flex;
-    gap: 14px;
-  }
-  .repo-stat {
-    font-family: var(--mono);
-    font-size: .6rem;
-    color: var(--dim);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  /* ============================================================
-     SOCIAL / CONTACT
-  ============================================================ */
-  #contact { position: relative; z-index: 1; }
-
-  .social-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .social-card {
-    border: 1px solid var(--border);
-    background: var(--surface);
-    overflow: hidden;
-    transition: border-color .25s, transform .25s;
-    position: relative;
-  }
-  .social-card:hover { transform: translateY(-4px); }
-
-  /* ---------- card header bar (platform-coloured) ---------- */
-  .social-bar {
-    height: 3px;
-    width: 100%;
-  }
-
-  /* ---------- card body ---------- */
-  .social-body {
-    padding: 24px;
-  }
-
-  .social-platform {
-    font-family: var(--mono);
-    font-size: .62rem;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .social-profile {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 20px;
-  }
-
-  /* ================================================================
-     SOCIAL PROFILE PICTURES
-     Each social card has its own circular avatar.
-
-     TO REPLACE PLACEHOLDERS:
-       Find the <img class="social-pfp" id="pfp-github"> (or -instagram/-gmail)
-       and set its src to your profile picture URL or local path.
-
-     SIZE: displayed at 42×42px (circular). Any square image works.
-     If linking to your actual GitHub/Instagram avatar URL, that's ideal.
-
-     Example GitHub avatar URL pattern:
-       https://avatars.githubusercontent.com/u/YOUR_GITHUB_USER_ID
-
-     For Gmail / Instagram you can use any hosted image URL.
-  ================================================================ */
-  .social-pfp {
-    width: 42px; height: 42px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center top;
-    flex-shrink: 0;
-    border: 1px solid var(--border-hi);
-  }
-
-  .social-info { flex: 1; min-width: 0; }
-  .social-name {
-    font-family: var(--sans);
-    font-size: .95rem;
-    font-weight: 700;
-    margin-bottom: 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .social-handle {
-    font-family: var(--mono);
-    font-size: .65rem;
-    color: var(--muted);
-  }
-
-  /* ---------- Visit buttons — each styled to the platform ---------- */
-  .visit-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    padding: 10px 16px;
-    font-family: var(--mono);
-    font-size: .68rem;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    font-weight: 700;
-    cursor: none;
-    border: none;
-    transition: opacity .2s, transform .15s;
-    text-decoration: none;
-  }
-  .visit-btn:hover { opacity: .88; transform: translateY(-1px); }
-
-  /* GitHub */
-  .btn-github  { background: #24292f; color: #f0f6fc; }
-  .social-card.card-github:hover { border-color: #444; }
-
-  /* Instagram */
-  .btn-instagram {
-    background: linear-gradient(90deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-    color: #fff;
-  }
-  .social-card.card-instagram:hover { border-color: #e1306c55; }
-
-  /* Gmail */
-  .btn-gmail { background: #ea4335; color: #fff; }
-  .social-card.card-gmail:hover { border-color: #ea433555; }
-
-  /* ============================================================
-     FOOTER
-  ============================================================ */
-  footer {
-    position: relative;
-    z-index: 1;
-    border-top: 1px solid var(--border);
-    padding: 40px 0;
-  }
-
-  .footer-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 32px;
-  }
-
-  .footer-left {
-    font-family: var(--mono);
-    font-size: .65rem;
-    color: var(--dim);
-    letter-spacing: .08em;
-  }
-  .footer-left span { color: var(--accent); }
-
-  .footer-right {
-    font-family: var(--mono);
-    font-size: .65rem;
-    color: var(--dim);
-    letter-spacing: .08em;
-  }
-
-  /* ============================================================
-     SCROLL REVEAL
-  ============================================================ */
-  .reveal {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity .65s, transform .65s;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .reveal-delay-1 { transition-delay: .1s; }
-  .reveal-delay-2 { transition-delay: .2s; }
-  .reveal-delay-3 { transition-delay: .3s; }
-
-  /* ============================================================
-     KEYFRAMES
-  ============================================================ */
-  @keyframes fade-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fade-in {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-
-  /* ============================================================
-     SCANLINE ACCENT (decorative, hero only)
-  ============================================================ */
-  .scanlines {
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 3px,
-      rgba(0,0,0,.07) 3px,
-      rgba(0,0,0,.07) 4px
-    );
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* ============================================================
-     RESPONSIVE
-  ============================================================ */
-  @media (max-width: 900px) {
-    .hero-inner    { grid-template-columns: 1fr; }
-    .hero-avatar   { display: none; }
-    .about-grid    { grid-template-columns: 1fr; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .social-grid   { grid-template-columns: 1fr; }
-    .nav-links     { display: none; }
-  }
-
-  @media (max-width: 640px) {
-    .container { padding: 0 20px; }
-    section    { padding: 80px 0; }
-    .hero-name { font-size: 3rem; }
-  }
-
-  .skill-bar { margin-bottom: 32px; }
-  .skill-info {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--text);
-  }
-  .bar-bg {
-    height: 6px;
-    background: var(--border);
-    border-radius: 999px;
-    overflow: hidden;
-  }
-  .bar-fill { 
-    height: 100%; 
-    background: linear-gradient(90deg, var(--accent), #fff); 
-    width: 0%; 
-    transition: width 1.6s cubic-bezier(0.34, 1.56, 0.64, 1); 
-}
-
-.side-neon {
-  position: fixed;
-  left: 28px;
-  top: 50%;
-  transform: translateY(-50%) rotate(-90deg);
-  font-family: 'Space Mono', monospace;
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: 12px;
-  color: var(--accent);
-  text-transform: uppercase;
-  white-space: nowrap;
-  opacity: 0.13;
-  z-index: 5;
-  pointer-events: none;
-  text-shadow:
-    0 0 8px var(--accent),
-    0 0 20px var(--accent),
-    0 0 35px #00ffff,
-    0 0 50px #ff00ff;
-  animation: neon-flicker 2.5s infinite ease-in-out;
-}
-
-@keyframes neon-flicker {
-  0% { opacity: 0.22; }
-  100% { opacity: 0.55; }
-}
-
-.side-neon::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: linear-gradient(transparent 50%, rgba(200,255,0,0.06) 50%);
-  background-size: 100% 6px;
-  animation: scanline 12s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes scanline {
-  0%   { background-position: 0 0; }
-  100% { background-position: 0 100%; }
-}
-
-.side-neon-right {
-  position: fixed;
-  right: 28px;
-  top: 50%;
-  transform: translateY(-50%) rotate(90deg);
-  font-family: 'Space Mono', monospace;
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: 12px;
-  color: #ff00ff;
-  text-transform: uppercase;
-  white-space: nowrap;
-  opacity: 0.11;
-  z-index: 5;
-  pointer-events: none;
-  text-shadow: 
-    0 0 8px #ff00ff,
-    0 0 20px #ff00ff,
-    0 0 35px #00ffff;
-  animation: neon-flicker 2.5s infinite alternate ease-in-out;
-}
-.side-neon-right::after {
-content: attr(data-text);
-position: absolute;
-top: 0; left: 0;
-width: 100%; height: 100%;
-background: linear-gradient(transparent 50%, rgba(200,255,0,0.06) 50%);
-background-size: 100% 6px;
-animation: scanline 12s linear infinite;
-pointer-events: none;
-}
-
-#hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background: radial-gradient(circle at center, transparent 35%, rgba(0,0,0,0.85) 85%);
-  box-shadow: 
-    inset 0 0 140px rgba(200,255,0,0.18),
-    inset 0 0 220px rgba(255,0,255,0.12);
-  animation: vignette-flicker 7s infinite alternate ease-in-out;
-}
-
-@keyframes vignette-flicker {
-  0%   { opacity: 0.82; }
-  100% { opacity: 0.95; }
-}
-
-body::after {
-  content: 'コード 構築 東京 ネオン 雨 未来 回路 電脳 影 光 雨 未来';
-  position: fixed;
-  inset: 0;
-  font-family: 'Space Mono', monospace;
-  font-size: 1.45rem;
-  line-height: 2.2;
-  letter-spacing: 85px;
-  color: var(--accent);
-  opacity: 0.014;
-  pointer-events: none;
-  z-index: 1;
-  overflow: hidden;
-  animation: katakana-drift 160s linear infinite;
-  white-space: pre;
-  transform: rotate(-6deg);
-}
-
-@keyframes katakana-drift {
-  from { background-position: 0 0; }
-  to   { background-position: -600px -1200px; }
-}
-.floating-katakana {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 3;
-  overflow: hidden;
-  opacity: 0.25;
-}
-
-.corner-bracket {
-  position: fixed;
-  width: 60px;
-  height: 60px;
-  border: 2px solid var(--accent);
-  opacity: 0.25;
-  z-index: 10;
-  pointer-events: none;
-  box-shadow: 
-    0 0 15px var(--accent),
-    0 0 30px var(--accent);
-  animation: bracket-flicker 3s infinite alternate ease-in-out;
-}
-
-.corner-bracket.top-left    { top: 30px; left: 30px; border-right: none; border-bottom: none; }
-.corner-bracket.top-right   { top: 30px; right: 30px; border-left: none; border-bottom: none; }
-.corner-bracket.bottom-left { bottom: 30px; left: 30px; border-right: none; border-top: none; }
-.corner-bracket.bottom-right{ bottom: 30px; right: 30px; border-left: none; border-top: none; }
-
-@keyframes bracket-flicker {
-  0%   { opacity: 0.18; }
-  100% { opacity: 0.35; }
-}
-
-.data-stream {
-  position: fixed;
-  top: 0;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(transparent, var(--accent), transparent);
-  opacity: 0.12;
-  z-index: 4;
-  pointer-events: none;
-  animation: stream-fall 25s linear infinite;
-}
-
-.data-stream.left  { left: 80px; }
-.data-stream.right { right: 80px; animation-duration: 18s; }
-
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  box-shadow: 
-    inset 0 0 80px rgba(0,0,0,0.6),
-    inset 0 0 160px rgba(200,255,0,0.08);
-  background: radial-gradient(circle at center, transparent 70%, rgba(0,0,0,0.4) 100%);
-  filter: contrast(1.15) brightness(0.95);
-  mix-blend-mode: multiply;
-  animation: crt-curve 8s infinite alternate ease-in-out;
-}
-
-@keyframes crt-curve {
-  0%   { transform: perspective(800px) rotateX(1deg); }
-  100% { transform: perspective(800px) rotateX(-1deg); }
-}
-
-.japan-lines {
-  position: fixed;
-  inset: 0;
-  background: repeating-linear-gradient(
-    90deg,
-    transparent,
-    transparent 80px,
-    rgba(200,255,0,0.08) 80px,
-    rgba(200,255,0,0.08) 82px
-  );
-  pointer-events: none;
-  z-index: 6;
-  opacity: 0.6;
-  mix-blend-mode: screen;
-}
-</style>
-
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Arli Turka",
+    "url": "https://arliT1-F.github.io/portfolio",
+    "jobTitle": "Systems Programmer",
+    "description": "Systems programmer specializing in C, Python, low-level systems, and PyTorch/ML tooling.",
+    "knowsAbout": ["C", "Python", "PyTorch", "Low-level Programming", "Automation", "Web Development"],
+    "sameAs": [
+      "https://github.com/ArliT1-F",
+      "https://instagram.com/a.tu2001"
+    ]
+  }
+  </script>
+ 
+  <link rel="stylesheet" href="static/style.css">
+ 
+  <!-- EmailJS (P2) -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init('YOUR_PUBLIC_KEY');</script>
 </head>
 <body>
-
-  <div class="side-neon" data-text="コード構築者">
-    コード構築者
+ 
+  <!-- A4. Load splash -->
+  <div id="splash">
+    <span class="splash-logo">AT://</span>
+    <span class="splash-sub">Loading system...</span>
   </div>
-
+ 
+  <div class="side-neon" data-text="コード構築者">コード構築者</div>
   <div class="side-neon-right" data-text="ネオン東京">ネオン東京</div>
-
-    
-
+ 
   <canvas id="floating-katakana" class="floating-katakana"></canvas>
-  <!-- custom cursor -->
-
+ 
+  <!-- Custom cursor -->
   <div id="cursor-dot"></div>
   <div id="cursor-ring"></div>
-
-  <!-- animated grid -->
-
+ 
+  <!-- Animated grid -->
   <div class="grid-bg"></div>
-  <!--
-  <div class="corner-bracket top-left"></div>
-  <div class="corner-bracket top-right"></div>
-  <div class="corner-bracket bottom-left"></div>
-  <div class="corner-bracket bottom-right"></div>
-
-  <div class="data-stream left"></div>
-  <div class="data-stream right"></div>
-  -->
+ 
   <!-- ============================================================
       NAVIGATION
   ============================================================ -->
-
   <nav id="nav">
     <div class="nav-inner">
       <div class="nav-logo">AT://</div>
@@ -1198,61 +93,50 @@ body::after {
       <div class="hamburger" id="hamburger">☰</div>
     </div>
   </nav>
-
+ 
   <!-- ============================================================
       HERO
   ============================================================ -->
-
   <section id="hero">
     <canvas id="particles"></canvas>
     <div class="scanlines"></div>
     <div class="container">
       <div class="hero-inner">
         <div class="hero-content">
-          <div class="hero-tag">Avaliable for collaboration</div>
+          <div class="hero-tag">Available for collaboration</div>
           <h1 class="hero-name" data-text="Arli Turka">Arli<br><span>Turka</span></h1>
-          <p class="hero-subtitle">
-            Systems programmer &amp; full-stack builder.<br>
-            C · Python · Low-level systems · ML tooling 
-          </p>
+          <p class="hero-subtitle"></p>
           <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 20px;">
             <a href="#projects" class="hero-cta">View Projects</a>
-            <a href="https://github.com/ArliT1-F/" target="_blank" class="hero-cta" 
+            <a href="https://github.com/ArliT1-F/" target="_blank" class="hero-cta"
               style="background: transparent; color: var(--accent); border: 1px solid var(--accent);">GitHub</a>
-            <a href="#" class="hero-cta" 
+            <a href="resume.pdf" download="Arli_Turka_Resume.pdf" class="hero-cta"
               style="background: transparent; color: var(--accent); border: 1px solid var(--accent);">
               ↓ Resume
             </a>
           </div>
         </div>
-
-  ```
-    <!-- PROFILE PICTURE — see CSS comment above for replacement instructions -->
-    <div class="hero-avatar">
-      <div class="avatar-ring"></div>
-      <div class="avatar-frame">
-        <!--
-          REPLACE THIS SRC TO SET YOUR PROFILE PICTURE.
-          Recommended: square image, minimum 400×400px.
-          The CSS will automatically crop it to a 220×220 circle.
-          object-position is set to "center top" to prioritise
-          the face area of portrait photos — adjust if needed.
-        -->
-        <img id="pfp"
-            src="https://placehold.co/400x400/111/555?text=AT"
-            alt="Arli Turka">
+ 
+        <!-- PROFILE PICTURE
+             Replace src below with your image path or URL.
+             Recommended: square image, minimum 400×400px.
+             object-position is "center top" to favour the face area. -->
+        <div class="hero-avatar">
+          <div class="avatar-ring"></div>
+          <div class="avatar-frame">
+            <img id="pfp"
+                src="https://placehold.co/400x400/111/555?text=AT"
+                alt="Arli Turka">
+          </div>
+        </div>
+ 
       </div>
     </div>
-  </div>
-  ```
-
-    </div>
   </section>
-
+ 
   <!-- ============================================================
       ABOUT
   ============================================================ -->
-
   <section id="about">
     <div class="container">
       <div class="section-label">About</div>
@@ -1262,55 +146,50 @@ body::after {
           <p>I use C to implement core logic and performance-critical components, and Python to prototype, experiment, and build tools quickly. This combination lets me move fast without losing visibility into what's happening under the hood.</p>
           <p>My projects are often exploratory, driven by curiosity and a preference for building things from first principles—whether that means implementing algorithms, experimenting with system behaviour, or creating lightweight tools that stay simple and efficient.</p>
         </div>
-
-  ```
-    <div class="about-stack">
-      <div class="stack-item reveal reveal-delay-1">
-        <div class="stack-icon">⚙️</div>
-        <div class="stack-info">
-          <div class="stack-name">C</div>
-          <div class="stack-role">Core logic · Performance-critical systems</div>
+ 
+        <div class="about-stack">
+          <div class="stack-item reveal reveal-delay-1">
+            <div class="stack-icon">⚙️</div>
+            <div class="stack-info">
+              <div class="stack-name">C</div>
+              <div class="stack-role">Core logic · Performance-critical systems</div>
+            </div>
+          </div>
+          <div class="stack-item reveal reveal-delay-2">
+            <div class="stack-icon">🐍</div>
+            <div class="stack-info">
+              <div class="stack-name">Python</div>
+              <div class="stack-role">Prototyping · Tooling · Rapid experimentation</div>
+            </div>
+          </div>
+          <div class="stack-item reveal reveal-delay-3">
+            <div class="stack-icon">🌐</div>
+            <div class="stack-info">
+              <div class="stack-name">Web</div>
+              <div class="stack-role">Frontend interfaces · Browser tooling</div>
+            </div>
+          </div>
+          <div class="stack-item reveal reveal-delay-3">
+            <div class="stack-icon">🔬</div>
+            <div class="stack-info">
+              <div class="stack-name">PyTorch</div>
+              <div class="stack-role">Tensor ops · Spatial data · ML experiments</div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="stack-item reveal reveal-delay-2">
-        <div class="stack-icon">🐍</div>
-        <div class="stack-info">
-          <div class="stack-name">Python</div>
-          <div class="stack-role">Prototyping · Tooling · Rapid experimentation</div>
-        </div>
-      </div>
-      <div class="stack-item reveal reveal-delay-3">
-        <div class="stack-icon">🌐</div>
-        <div class="stack-info">
-          <div class="stack-name">Web</div>
-          <div class="stack-role">Frontend interfaces · Browser tooling</div>
-        </div>
-      </div>
-      <div class="stack-item reveal reveal-delay-3">
-        <div class="stack-icon">🔬</div>
-        <div class="stack-info">
-          <div class="stack-name">PyTorch</div>
-          <div class="stack-role">Tensor ops · Spatial data · ML experiments</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  ```
-
     </div>
   </section>
-
-
+ 
   <!-- ============================================================
-      SKILLS SECTION
+      SKILLS
   ============================================================ -->
-
   <section id="skills">
     <div class="container">
       <div class="section-label">Skills</div>
-      
+ 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 60px;">
-      
+ 
         <div>
           <div class="skill-bar">
             <div class="skill-info"><span>C / Systems Programming</span><span>95%</span></div>
@@ -1325,7 +204,7 @@ body::after {
             <div class="bar-bg"><div class="bar-fill" data-width="82"></div></div>
           </div>
         </div>
-
+ 
         <div>
           <div class="skill-bar">
             <div class="skill-info"><span>Web Development</span><span>78%</span></div>
@@ -1336,27 +215,23 @@ body::after {
             <div class="bar-bg"><div class="bar-fill" data-width="90"></div></div>
           </div>
         </div>
+ 
       </div>
     </div>
   </section>
-
+ 
   <!-- ============================================================
       PROJECTS
   ============================================================ -->
-
-  <!-- ============================================================
-      PROJECTS
-  ============================================================ -->
-
   <section id="projects">
     <div class="container">
       <div class="section-label">Projects</div>
-      
+ 
       <div class="projects-grid">
-
+ 
         <!-- 01 web-tool -->
         <a href="https://github.com/ArliT1-F/web-tool" target="_blank" rel="noopener" class="project-card reveal">
-          <div class="project-thumbnail" style="height: 160px; background: url('/img/web-tool.png') center/cover; border-radius: 8px; margin-bottom: 20px;"></div>
+          <div class="project-thumbnail lazy-bg" data-bg="img/web-tool.png" style="height: 160px; border-radius: 8px; margin-bottom: 20px;"></div>
           <div>
             <div class="project-index">01 /</div>
             <div class="project-header">
@@ -1390,10 +265,10 @@ body::after {
             </div>
           </div>
         </a>
-
+ 
         <!-- 02 torch2grid -->
         <a href="https://github.com/ArliT1-F/torch2grid" target="_blank" rel="noopener" class="project-card reveal reveal-delay-1">
-          <div class="project-thumbnail" style="height: 160px; background: url('/img/torch2grid.png') center/cover; border-radius: 8px; margin-bottom: 20px;"></div>
+          <div class="project-thumbnail lazy-bg" data-bg="img/torch2grid.png" style="height: 160px; border-radius: 8px; margin-bottom: 20px;"></div>
           <div>
             <div class="project-index">02 /</div>
             <div class="project-header">
@@ -1427,10 +302,10 @@ body::after {
             </div>
           </div>
         </a>
-
+ 
         <!-- 03 quantflow -->
         <a href="https://github.com/ArliT1-F/quantflow" target="_blank" rel="noopener" class="project-card reveal reveal-delay-2">
-          <div class="project-thumbnail" style="height: 160px; background: url('img/quantflow.png') center/cover; border-radius: 8px; margin-bottom: 20px;"></div>
+          <div class="project-thumbnail lazy-bg" data-bg="img/quantflow.png" style="height: 160px; border-radius: 8px; margin-bottom: 20px;"></div>
           <div>
             <div class="project-index">03 /</div>
             <div class="project-header">
@@ -1464,306 +339,126 @@ body::after {
             </div>
           </div>
         </a>
-
+ 
       </div>
     </div>
   </section>
-
+ 
   <!-- ============================================================
       CONTACT / SOCIAL
   ============================================================ -->
-
   <section id="contact">
     <div class="container">
       <div class="section-label">Connect</div>
       <div class="social-grid">
-    <!-- GitHub -->
-    <div class="social-card card-github reveal">
-      <div class="social-bar" style="background:#444;"></div>
-      <div class="social-body">
-        <div class="social-platform">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="#888"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-          GitHub
-        </div>
-        <div class="social-profile">
-          <!--
-            GITHUB AVATAR: Replace src with your GitHub avatar.
-            Fastest method: https://avatars.githubusercontent.com/ArliT1-F
-            Displayed at 42×42px circular crop.
-          -->
-          <img class="social-pfp" id="pfp-github"
-              src="https://avatars.githubusercontent.com/ArliT1-F"
-              alt="GitHub avatar">
-          <div class="social-info">
-            <div class="social-name">Arli Turka</div>
-            <div class="social-handle">@ArliT1-F</div>
+ 
+        <!-- GitHub -->
+        <div class="social-card card-github reveal">
+          <div class="social-bar" style="background:#444;"></div>
+          <div class="social-body">
+            <div class="social-platform">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#888"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              GitHub
+            </div>
+            <div class="social-profile">
+              <!-- GITHUB AVATAR: replace src with https://avatars.githubusercontent.com/ArliT1-F -->
+              <img class="social-pfp" id="pfp-github"
+                  src="https://avatars.githubusercontent.com/ArliT1-F"
+                  alt="GitHub avatar">
+              <div class="social-info">
+                <div class="social-name">Arli Turka</div>
+                <div class="social-handle">@ArliT1-F</div>
+              </div>
+            </div>
+            <a href="https://github.com/ArliT1-F" target="_blank" rel="noopener" class="visit-btn btn-github">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              View on GitHub
+            </a>
           </div>
         </div>
-        <a href="https://github.com/ArliT1-F" target="_blank" rel="noopener" class="visit-btn btn-github">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-          View on GitHub
-        </a>
-      </div>
-    </div>
-
-    <!-- Instagram -->
-    <div class="social-card card-instagram reveal reveal-delay-1">
-      <div class="social-bar" style="background: linear-gradient(90deg,#f09433,#dc2743,#bc1888);"></div>
-      <div class="social-body">
-        <div class="social-platform" style="color:#e1306c;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="#e1306c"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          Instagram
-        </div>
-        <div class="social-profile">
-          <!--
-            INSTAGRAM AVATAR: Replace src with your Instagram profile picture URL.
-            Displayed at 42×42px circular crop.
-          -->
-          <img class="social-pfp" id="pfp-instagram"
-              src="https://placehold.co/84x84/1a0a10/993355?text=AT"
-              alt="Instagram avatar">
-          <div class="social-info">
-            <div class="social-name">Arli Turka</div>
-            <div class="social-handle">@a.tu2001</div>
+ 
+        <!-- Instagram -->
+        <div class="social-card card-instagram reveal reveal-delay-1">
+          <div class="social-bar" style="background: linear-gradient(90deg,#f09433,#dc2743,#bc1888);"></div>
+          <div class="social-body">
+            <div class="social-platform" style="color:#e1306c;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#e1306c"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              Instagram
+            </div>
+            <div class="social-profile">
+              <!-- INSTAGRAM AVATAR: replace src with your Instagram profile picture URL -->
+              <img class="social-pfp" id="pfp-instagram"
+                  src="https://placehold.co/84x84/1a0a10/993355?text=AT"
+                  alt="Instagram avatar">
+              <div class="social-info">
+                <div class="social-name">Arli Turka</div>
+                <div class="social-handle">@a.tu2001</div>
+              </div>
+            </div>
+            <a href="https://instagram.com/a.tu2001" target="_blank" rel="noopener" class="visit-btn btn-instagram">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              Follow on Instagram
+            </a>
           </div>
         </div>
-        <a href="https://instagram.com/a.tu2001" target="_blank" rel="noopener" class="visit-btn btn-instagram">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          Follow on Instagram
-        </a>
-      </div>
-    </div>
-
-    <!-- Gmail -->
-    <div class="social-card card-gmail reveal reveal-delay-2">
-      <div class="social-bar" style="background:#ea4335;"></div>
-      <div class="social-body">
-        <div class="social-platform" style="color:#ea4335;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="#ea4335"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
-          Gmail
-        </div>
-        <div class="social-profile">
-          <!--
-            GMAIL AVATAR: Replace src with a photo or your Google profile picture URL.
-            Displayed at 42×42px circular crop.
-          -->
-          <img class="social-pfp" id="pfp-gmail"
-              src="https://placehold.co/84x84/1a0a08/993322?text=AT"
-              alt="Gmail avatar">
-          <div class="social-info">
-            <div class="social-name">Arli Turka</div>
-            <div class="social-handle">arliturka@gmail.com</div>
+ 
+        <!-- Gmail -->
+        <div class="social-card card-gmail reveal reveal-delay-2">
+          <div class="social-bar" style="background:#ea4335;"></div>
+          <div class="social-body">
+            <div class="social-platform" style="color:#ea4335;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#ea4335"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+              Gmail
+            </div>
+            <div class="social-profile">
+              <!-- GMAIL AVATAR: replace src with your Google profile picture URL -->
+              <img class="social-pfp" id="pfp-gmail"
+                  src="https://placehold.co/84x84/1a0a08/993322?text=AT"
+                  alt="Gmail avatar">
+              <div class="social-info">
+                <div class="social-name">Arli Turka</div>
+                <div class="social-handle">arliturka@gmail.com</div>
+              </div>
+            </div>
+            <a href="mailto:arliturka@gmail.com" class="visit-btn btn-gmail">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+              Send Email
+            </a>
+            <button id="copy-email-btn" class="visit-btn btn-copy-email">Copy Email</button>
           </div>
         </div>
-        <a href="mailto:arliturka@gmail.com" class="visit-btn btn-gmail">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
-          Send Email
-        </a>
+ 
       </div>
-    </div>
-
-  </div>
-  ```
-
+ 
+      <!-- P2. Contact form -->
+      <div class="contact-form-wrap reveal" style="margin-top: 60px;">
+        <div class="section-label" style="margin-bottom:32px;">Send a Message</div>
+        <form id="contact-form" class="contact-form">
+          <div class="form-row">
+            <input type="text"  name="from_name" placeholder="Name"  required class="form-input">
+            <input type="email" name="reply_to"  placeholder="Email" required class="form-input">
+          </div>
+          <textarea name="message" placeholder="Message" required class="form-input form-textarea"></textarea>
+          <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+            <button type="submit" class="hero-cta form-submit">Send Message</button>
+            <span id="form-status" class="form-status"></span>
+          </div>
+        </form>
+      </div>
+ 
     </div>
   </section>
-
+ 
   <!-- ============================================================
       FOOTER
   ============================================================ -->
-
   <footer>
     <div class="footer-inner">
       <div class="footer-left">© 2025 <span>Arli Turka</span>.</div>
       <div class="footer-right">arlit1-f.github.io/portfolio</div>
     </div>
   </footer>
-
-  <!-- ============================================================
-      JAVASCRIPT
-  ============================================================ -->
-
-  <script>
-    /* ----- Custom cursor ----- */
-    const dot  = document.getElementById('cursor-dot');
-    const ring = document.getElementById('cursor-ring');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      dot.style.left = mx + 'px';
-      dot.style.top  = my + 'px';
-    });
-
-    (function animRing() {
-      rx += (mx - rx) * 0.12;
-      ry += (my - ry) * 0.12;
-      ring.style.left = rx + 'px';
-      ring.style.top  = ry + 'px';
-      requestAnimationFrame(animRing);
-    })();
-
-    /* ----- Nav scroll state ----- */
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 30);
-    });
-
-    /* ----- Scroll reveal ----- */
-    const revealEls = document.querySelectorAll('.reveal');
-    const observer  = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    revealEls.forEach(el => observer.observe(el));
-
-    /* ----- Glitch text effect on name ----- */
-    const canvas = document.getElementById('particles');
-  const ctx = canvas.getContext('2d');
-
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
-
-  let particles = [];
-  class Particle {
-    constructor() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height * 0.8;
-      this.size = Math.random() * 2.2 + 0.5;
-      this.speedX = Math.random() * 0.6 - 0.3;
-      this.speedY = Math.random() * 0.4 + 0.05;
-    }
-    update() {
-      this.x += this.speedX;
-      this.y += this.speedY;
-      if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-      if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-    }
-    draw() {
-      ctx.fillStyle = '#c8ff00';
-      ctx.globalAlpha = 0.45;
-      ctx.fillRect(this.x, this.y, this.size, this.size);
-    }
-  }
-
-  for (let i = 0; i < 160; i++) {
-    particles.push(new Particle());
-  }
-
-  function animateParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => {
-      p.update();
-      p.draw();
-    });
-    requestAnimationFrame(animateParticles);
-  }
-  animateParticles();
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const skillsSection = document.getElementById('skills');
-
-      if (!skillsSection) {
-        console.warn('❌ Skills section with id="skills" not found');
-        return;
-      }
-
-      const skillObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            console.log('✅ Skills section visible — animating bars');
-
-            const bars = entry.target.querySelectorAll('.bar-fill');
-            bars.forEach((bar, index) => {
-              const width = bar.getAttribute('data-width');
-              if (width) {
-                setTimeout(() => {
-                  bar.style.width = width + '%';
-                }, index * 80);   // nice staggered effect
-              }
-            });
-
-            skillObserver.unobserve(entry.target);
-          }
-        });
-      }, {
-        threshold: 0.35,
-        rootMargin: "0px 0px -80px 0px"
-      });
-
-      skillObserver.observe(skillsSection);
-    });
-
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.querySelector('.nav-links');
-
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-  });
-
-  const kataCanvas = document.getElementById('floating-katakana');
-const kataCtx = kataCanvas.getContext('2d');
-
-function resizeKata() {
-  kataCanvas.width = window.innerWidth;
-  kataCanvas.height = window.innerHeight;
-}
-resizeKata();
-window.addEventListener('resize', resizeKata);
-
-const katakanaChars = ['コード', '構築', 'ネオン', '東京', '未来', '回路', '電脳', '影', '光', '雨', '零', '零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
-
-let fragments = [];
-
-class Fragment {
-  constructor() {
-    this.x = Math.random() * kataCanvas.width;
-    this.y = Math.random() * kataCanvas.height;
-    this.size = Math.random() * 18 + 11;
-    this.speed = Math.random() * 0.6 + 0.3;
-    this.text = katakanaChars[Math.floor(Math.random() * katakanaChars.length)];
-    this.opacity = Math.random() * 0.6 + 0.3;
-    this.rotation = Math.random() * 360;
-  }
-  update() {
-    this.y += this.speed;
-    this.opacity = Math.sin(Date.now() / 1200) * 0.3 + 0.6;
-    if (this.y > kataCanvas.height) this.y = -30;
-  }
-  draw() {
-    kataCtx.save();
-    kataCtx.globalAlpha = this.opacity;
-    kataCtx.fillStyle = '#c8ff00';
-    kataCtx.shadowBlur = 18;
-    kataCtx.shadowColor = '#c8ff00';
-    kataCtx.font = `${this.size}px 'Space Mono', monospace`;
-    kataCtx.fillText(this.text, this.x, this.y);
-    kataCtx.restore();
-  }
-}
-
-for (let i = 0; i < 45; i++) {
-  fragments.push(new Fragment());
-}
-
-function animateKata() {
-  kataCtx.clearRect(0, 0, kataCanvas.width, kataCanvas.height);
-  fragments.forEach(f => {
-    f.update();
-    f.draw();
-  });
-  requestAnimationFrame(animateKata);
-}
-animateKata();
-  </script>
+ 
+  <script src="static/script.js"></script>
 </body>
 </html>
