@@ -1,10 +1,9 @@
 import './style.css'
+import { injectSpeedInsights } from '@vercel/speed-insights'
 
-
-send({
-  route: window.location.pathname,
-  href: window.location.href,
-  type: 'pageview',
+// Initialize Vercel Speed Insights
+injectSpeedInsights({
+  debug: true, // Enable debug logging in development
 });
 
 /* ============================================================
