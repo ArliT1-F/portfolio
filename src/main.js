@@ -1,4 +1,12 @@
 import './style.css'
+import { send } from '@vercel/speed-insights';
+
+
+send({
+  route: window.location.pathname,
+  href: window.location.href,
+  type: 'pageview',
+});
 
 /* ============================================================
    CUSTOM CURSOR — throttled via rAF
