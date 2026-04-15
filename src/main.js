@@ -1,5 +1,4 @@
 import './style.css'
-import { send } from '@vercel/speed-insights';
 
 
 send({
