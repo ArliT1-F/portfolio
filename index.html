@@ -23,7 +23,7 @@
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Arli Turka | Systems Programmer">
-  <meta name="twitter:description" content="C · Python · Low-level systems · PyTorch · Automation">
+  <meta name="twitter:description" content="C &middot; Python &middot; Low-level systems &middot; PyTorch &middot; Automation">
 
   <link rel="icon" href="https://avatars.githubusercontent.com/ArliT1-F" type="image/png">
   <link rel="apple-touch-icon" href="https://avatars.githubusercontent.com/ArliT1-F">
@@ -52,14 +52,14 @@
   <link rel="stylesheet" href="/src/style.css">
 </head>
 
-<body class="bg-bg text-[#e8e8e8] font-sans">
+<body class="bg-[var(--bg)] text-[var(--text)] font-sans">
 
   <!-- Splash -->
   <div id="splash">
     <span class="font-mono text-4xl text-accent tracking-[.2em]"
       style="text-shadow:0 0 20px #c8ff00,0 0 40px #c8ff00">AT://</span>
-    <span class="font-mono text-[.65rem] text-muted tracking-[.3em] uppercase">Booting system...</span>
-    <div class="w-48 h-px bg-border overflow-hidden rounded-full mt-2">
+    <span class="font-mono text-[.65rem] text-[var(--muted)] tracking-[.3em] uppercase">Booting system...</span>
+    <div class="w-48 h-px bg-[var(--border)] overflow-hidden rounded-full mt-2">
       <div class="h-full bg-accent" style="animation: splash-bar 0.3s cubic-bezier(0.4,0,0.2,1) forwards;"></div>
     </div>
   </div>
@@ -69,31 +69,22 @@
   <div class="side-neon-right">ネオン東京</div>
 
   <!-- Custom cursor -->
-  <div id="cursor-dot"
-    class="fixed w-[6px] h-[6px] bg-accent rounded-full pointer-events-none z-[9999]"></div>
-  <div id="cursor-ring"
-    class="fixed w-[30px] h-[30px] border border-accent rounded-full pointer-events-none z-[9999] transition-[width,height,opacity] duration-150"></div>
+  <div id="cursor-dot" class="fixed w-[6px] h-[6px] bg-accent rounded-full pointer-events-none z-[9999]"></div>
+  <div id="cursor-ring" class="fixed w-[30px] h-[30px] border border-accent rounded-full pointer-events-none z-[9999] transition-[width,height,opacity] duration-150"></div>
 
   <!-- Static grid -->
   <div class="grid-bg"></div>
 
   <!-- ── NAVIGATION ── -->
-  <nav id="nav"
-    class="fixed top-0 left-0 right-0 z-[500] py-5 border-b">
+  <nav id="nav" class="fixed top-0 left-0 right-0 z-[500] py-4 border-b">
     <div class="max-w-[1100px] mx-auto px-8 flex items-center justify-between">
-      <div class="font-mono text-[.8rem] text-accent tracking-[.08em]">AT://</div>
-      <ul id="nav-links" class="flex gap-9 list-none">
-        <li><a href="#about"
-            class="nav-link font-mono text-[.72rem] tracking-[.12em] uppercase text-muted hover:text-[#e8e8e8] transition-colors relative">About</a>
-        </li>
-        <li><a href="#projects"
-            class="nav-link font-mono text-[.72rem] tracking-[.12em] uppercase text-muted hover:text-[#e8e8e8] transition-colors relative">Projects</a>
-        </li>
-        <li><a href="#contact"
-            class="nav-link font-mono text-[.72rem] tracking-[.12em] uppercase text-muted hover:text-[#e8e8e8] transition-colors relative">Contact</a>
-        </li>
+      <a href="#" class="font-mono text-sm text-accent tracking-[.08em] hover:opacity-80 transition-opacity">AT://</a>
+      <ul id="nav-links" class="flex gap-10 list-none">
+        <li><a href="#about" class="nav-link font-mono text-[.72rem] tracking-[.14em] uppercase text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors relative">About</a></li>
+        <li><a href="#projects" class="nav-link font-mono text-[.72rem] tracking-[.14em] uppercase text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors relative">Projects</a></li>
+        <li><a href="#contact" class="nav-link font-mono text-[.72rem] tracking-[.14em] uppercase text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors relative">Contact</a></li>
       </ul>
-      <div id="hamburger" class="hamburger hidden font-mono text-[1.8rem] text-accent p-2">&#9776;</div>
+      <div id="hamburger" class="hamburger hidden font-mono text-2xl text-accent p-2">&#9776;</div>
     </div>
   </nav>
 
@@ -102,46 +93,35 @@
     <canvas id="particles" class="absolute inset-0 z-[1] pointer-events-none opacity-60"></canvas>
     <div class="scanlines"></div>
     <div class="max-w-[1100px] mx-auto px-8 w-full">
-      <div class="grid grid-cols-[1fr_auto] gap-16 items-center w-full max-[900px]:grid-cols-1">
+      <div class="grid grid-cols-[1fr_auto] gap-20 items-center w-full max-[900px]:grid-cols-1">
 
         <div class="hero-content relative z-[3]">
-          <div
-            class="hero-tag font-mono text-[.7rem] tracking-[.2em] uppercase text-accent mb-7 flex items-center gap-2.5">
-            <span class="block w-[30px] h-px bg-accent"></span>
+          <div class="hero-tag font-mono text-[.72rem] tracking-[.2em] uppercase text-accent mb-8 flex items-center gap-3">
+            <span class="block w-8 h-px bg-accent"></span>
             Available for collaboration
           </div>
 
-          <div class="hero-name-wrap mb-8">
-            <h1
-              class="hero-name font-sans text-[clamp(3.5rem,8vw,7rem)] font-extrabold leading-[.95] tracking-[-0.02em] text-[#e8e8e8]"
+          <div class="hero-name-wrap mb-10">
+            <h1 class="hero-name font-sans text-[clamp(3.5rem,8vw,7rem)] font-extrabold leading-[.92] tracking-[-0.02em]"
               data-text="Arli Turka">
               Arli<br><span class="text-accent">Turka</span>
             </h1>
           </div>
 
-          <p class="hero-subtitle font-mono text-[.85rem] text-muted leading-[1.7] max-w-[480px] mb-12"></p>
+          <p class="hero-subtitle font-mono text-[.88rem] text-[var(--text-secondary)] leading-[1.8] max-w-[480px] mb-14"></p>
 
           <div class="hero-ctas flex gap-4 flex-wrap">
-            <a href="#projects"
-              class="hero-cta inline-flex items-center gap-2.5 bg-accent text-black font-mono text-[.75rem] font-bold tracking-[.12em] uppercase px-7 py-3.5 transition-colors duration-150 hover:bg-white">
-              View Projects
-            </a>
-            <a href="https://github.com/ArliT1-F/" target="_blank"
-              class="hero-cta inline-flex items-center gap-2.5 bg-transparent text-accent font-mono text-[.75rem] font-bold tracking-[.12em] uppercase px-7 py-3.5 border border-accent transition-colors duration-150 hover:bg-accent hover:text-black">
-              GitHub
-            </a>
-            <a href="resume.pdf" download="Arli_Turka_Resume.pdf"
-              class="hero-cta inline-flex items-center gap-2.5 bg-transparent text-accent font-mono text-[.75rem] font-bold tracking-[.12em] uppercase px-7 py-3.5 border border-accent transition-colors duration-150 hover:bg-accent hover:text-black">
-              &darr; Resume
-            </a>
+            <a href="#projects" class="btn-primary">View Projects</a>
+            <a href="https://github.com/ArliT1-F/" target="_blank" class="btn-outline">GitHub</a>
+            <a href="resume.pdf" download="Arli_Turka_Resume.pdf" class="btn-outline">&darr; Resume</a>
           </div>
         </div>
 
         <!-- Avatar -->
         <div class="hero-avatar relative max-[900px]:hidden">
           <div class="avatar-ring"></div>
-          <div class="w-[220px] h-[220px] rounded-full overflow-hidden border border-border-hi relative z-[1]">
-            <img id="pfp" src="https://placehold.co/400x400/111/555?text=AT" alt="Arli Turka"
+          <div class="w-[230px] h-[230px] rounded-full overflow-hidden border-2 border-[var(--border-hi)] relative z-[1]">
+            <img id="pfp" src="https://placehold.co/460x460/111/555?text=AT" alt="Arli Turka"
               class="w-full h-full object-cover object-top grayscale-[20%] transition-[filter] duration-300 hover:grayscale-0"
               loading="lazy" decoding="async">
           </div>
@@ -152,57 +132,51 @@
   </section>
 
   <!-- ── ABOUT ── -->
-  <section id="about" class="relative z-[1] py-[120px]">
+  <section id="about" class="relative z-[1] py-28">
     <div class="max-w-[1100px] mx-auto px-8">
-      <div
-        class="section-label font-mono text-[.68rem] tracking-[.25em] uppercase text-accent mb-12 flex items-center gap-3">
-        About</div>
-      <div class="grid grid-cols-2 gap-16 items-start max-[900px]:grid-cols-1">
+      <div class="section-label text-[.7rem] tracking-[.25em] uppercase text-accent mb-14">About</div>
+      <div class="grid grid-cols-[1.2fr_1fr] gap-20 items-start max-[900px]:grid-cols-1">
 
         <div class="about-text reveal">
-          <p class="font-sans text-[1.05rem] leading-[1.85] text-[#aaa] mb-6">I build software across the stack—from
+          <p class="font-sans text-[1.08rem] leading-[1.9] text-[var(--text-secondary)] mb-7">I build software across the stack—from
             low-level systems code to high-level scripting—focusing on performance, control, and understanding how
             things actually work.</p>
-          <p class="font-sans text-[1.05rem] leading-[1.85] text-[#aaa] mb-6">I use C to implement core logic and
+          <p class="font-sans text-[1.08rem] leading-[1.9] text-[var(--text-secondary)] mb-7">I use C to implement core logic and
             performance-critical components, and Python to prototype, experiment, and build tools quickly. This
             combination lets me move fast without losing visibility into what's happening under the hood.</p>
-          <p class="font-sans text-[1.05rem] leading-[1.85] text-[#aaa]">My projects are often exploratory, driven by
+          <p class="font-sans text-[1.08rem] leading-[1.9] text-[var(--text-secondary)]">My projects are often exploratory, driven by
             curiosity and a preference for building things from first principles—whether that means implementing
             algorithms, experimenting with system behaviour, or creating lightweight tools that stay simple and
             efficient.</p>
         </div>
 
-        <div class="flex flex-col gap-4 pt-1.5">
-          <div
-            class="stack-item reveal reveal-delay-1 flex items-center gap-4 px-5 py-[18px] border border-border bg-surface transition-[border-color,transform] duration-200 relative overflow-hidden hover:border-border-hi hover:translate-x-1">
-            <div class="text-xl w-9 text-center">&#9881;&#65039;</div>
+        <div class="flex flex-col gap-3.5">
+          <div class="stack-item reveal reveal-delay-1 flex items-center gap-4 px-5 py-4 rounded-sm">
+            <div class="text-2xl w-10 text-center">&#9881;&#65039;</div>
             <div class="flex-1">
-              <div class="font-mono text-[.78rem] tracking-[.05em] mb-0.5">C</div>
-              <div class="font-mono text-[.65rem] text-muted tracking-[.05em]">Core logic &middot; Performance-critical systems</div>
+              <div class="font-mono text-[.82rem] tracking-[.04em] mb-1 text-[var(--text)]">C</div>
+              <div class="font-mono text-[.66rem] text-[var(--muted)] tracking-[.04em]">Core logic &middot; Performance-critical systems</div>
             </div>
           </div>
-          <div
-            class="stack-item reveal reveal-delay-2 flex items-center gap-4 px-5 py-[18px] border border-border bg-surface transition-[border-color,transform] duration-200 relative overflow-hidden hover:border-border-hi hover:translate-x-1">
-            <div class="text-xl w-9 text-center">&#128013;</div>
+          <div class="stack-item reveal reveal-delay-2 flex items-center gap-4 px-5 py-4 rounded-sm">
+            <div class="text-2xl w-10 text-center">&#128013;</div>
             <div class="flex-1">
-              <div class="font-mono text-[.78rem] tracking-[.05em] mb-0.5">Python</div>
-              <div class="font-mono text-[.65rem] text-muted tracking-[.05em]">Prototyping &middot; Tooling &middot; Rapid experimentation</div>
+              <div class="font-mono text-[.82rem] tracking-[.04em] mb-1 text-[var(--text)]">Python</div>
+              <div class="font-mono text-[.66rem] text-[var(--muted)] tracking-[.04em]">Prototyping &middot; Tooling &middot; Rapid experimentation</div>
             </div>
           </div>
-          <div
-            class="stack-item reveal reveal-delay-3 flex items-center gap-4 px-5 py-[18px] border border-border bg-surface transition-[border-color,transform] duration-200 relative overflow-hidden hover:border-border-hi hover:translate-x-1">
-            <div class="text-xl w-9 text-center">&#127760;</div>
+          <div class="stack-item reveal reveal-delay-3 flex items-center gap-4 px-5 py-4 rounded-sm">
+            <div class="text-2xl w-10 text-center">&#127760;</div>
             <div class="flex-1">
-              <div class="font-mono text-[.78rem] tracking-[.05em] mb-0.5">Web</div>
-              <div class="font-mono text-[.65rem] text-muted tracking-[.05em]">Frontend interfaces &middot; Browser tooling</div>
+              <div class="font-mono text-[.82rem] tracking-[.04em] mb-1 text-[var(--text)]">Web</div>
+              <div class="font-mono text-[.66rem] text-[var(--muted)] tracking-[.04em]">Frontend interfaces &middot; Browser tooling</div>
             </div>
           </div>
-          <div
-            class="stack-item reveal reveal-delay-3 flex items-center gap-4 px-5 py-[18px] border border-border bg-surface transition-[border-color,transform] duration-200 relative overflow-hidden hover:border-border-hi hover:translate-x-1">
-            <div class="text-xl w-9 text-center">&#128300;</div>
+          <div class="stack-item reveal reveal-delay-3 flex items-center gap-4 px-5 py-4 rounded-sm">
+            <div class="text-2xl w-10 text-center">&#128300;</div>
             <div class="flex-1">
-              <div class="font-mono text-[.78rem] tracking-[.05em] mb-0.5">PyTorch</div>
-              <div class="font-mono text-[.65rem] text-muted tracking-[.05em]">Tensor ops &middot; Spatial data &middot; ML experiments</div>
+              <div class="font-mono text-[.82rem] tracking-[.04em] mb-1 text-[var(--text)]">PyTorch</div>
+              <div class="font-mono text-[.66rem] text-[var(--muted)] tracking-[.04em]">Tensor ops &middot; Spatial data &middot; ML experiments</div>
             </div>
           </div>
         </div>
@@ -212,76 +186,63 @@
   </section>
 
   <!-- ── SKILLS ── -->
-  <section id="skills" class="relative z-[1] py-[120px]">
+  <section id="skills" class="relative z-[1] py-28">
     <div class="max-w-[1100px] mx-auto px-8">
-      <div
-        class="section-label font-mono text-[.68rem] tracking-[.25em] uppercase text-accent mb-12 flex items-center gap-3">
-        Skills</div>
-      <div class="grid gap-[60px]" style="grid-template-columns: repeat(auto-fit, minmax(360px,1fr))">
-        <div>
-          <div class="mb-8">
-            <div class="flex justify-between mb-2 font-mono text-[.78rem] text-[#e8e8e8]"><span>C / Systems Programming</span><span>95%</span></div>
-            <div class="h-[6px] bg-border rounded-full overflow-hidden"><div class="bar-fill rounded-full" data-width="95"></div></div>
-          </div>
-          <div class="mb-8">
-            <div class="flex justify-between mb-2 font-mono text-[.78rem] text-[#e8e8e8]"><span>Python</span><span>92%</span></div>
-            <div class="h-[6px] bg-border rounded-full overflow-hidden"><div class="bar-fill rounded-full" data-width="92"></div></div>
-          </div>
-          <div class="mb-8">
-            <div class="flex justify-between mb-2 font-mono text-[.78rem] text-[#e8e8e8]"><span>PyTorch</span><span>82%</span></div>
-            <div class="h-[6px] bg-border rounded-full overflow-hidden"><div class="bar-fill rounded-full" data-width="82"></div></div>
-          </div>
+      <div class="section-label text-[.7rem] tracking-[.25em] uppercase text-accent mb-14">Skills</div>
+      <div class="grid grid-cols-2 gap-x-20 gap-y-0 max-[640px]:grid-cols-1">
+        <div class="mb-7">
+          <div class="flex justify-between mb-2.5 font-mono text-[.8rem]"><span class="text-[var(--text)]">C / Systems Programming</span><span class="text-[var(--text-secondary)]">95%</span></div>
+          <div class="h-2 bg-[var(--border)] rounded-full overflow-hidden"><div class="bar-fill" data-width="95"></div></div>
         </div>
-        <div>
-          <div class="mb-8">
-            <div class="flex justify-between mb-2 font-mono text-[.78rem] text-[#e8e8e8]"><span>Web Development</span><span>78%</span></div>
-            <div class="h-[6px] bg-border rounded-full overflow-hidden"><div class="bar-fill rounded-full" data-width="78"></div></div>
-          </div>
-          <div class="mb-8">
-            <div class="flex justify-between mb-2 font-mono text-[.78rem] text-[#e8e8e8]"><span>Automation &amp; Tooling</span><span>90%</span></div>
-            <div class="h-[6px] bg-border rounded-full overflow-hidden"><div class="bar-fill rounded-full" data-width="90"></div></div>
-          </div>
+        <div class="mb-7">
+          <div class="flex justify-between mb-2.5 font-mono text-[.8rem]"><span class="text-[var(--text)]">Web Development</span><span class="text-[var(--text-secondary)]">78%</span></div>
+          <div class="h-2 bg-[var(--border)] rounded-full overflow-hidden"><div class="bar-fill" data-width="78"></div></div>
+        </div>
+        <div class="mb-7">
+          <div class="flex justify-between mb-2.5 font-mono text-[.8rem]"><span class="text-[var(--text)]">Python</span><span class="text-[var(--text-secondary)]">92%</span></div>
+          <div class="h-2 bg-[var(--border)] rounded-full overflow-hidden"><div class="bar-fill" data-width="92"></div></div>
+        </div>
+        <div class="mb-7">
+          <div class="flex justify-between mb-2.5 font-mono text-[.8rem]"><span class="text-[var(--text)]">Automation &amp; Tooling</span><span class="text-[var(--text-secondary)]">90%</span></div>
+          <div class="h-2 bg-[var(--border)] rounded-full overflow-hidden"><div class="bar-fill" data-width="90"></div></div>
+        </div>
+        <div class="mb-7">
+          <div class="flex justify-between mb-2.5 font-mono text-[.8rem]"><span class="text-[var(--text)]">PyTorch</span><span class="text-[var(--text-secondary)]">82%</span></div>
+          <div class="h-2 bg-[var(--border)] rounded-full overflow-hidden"><div class="bar-fill" data-width="82"></div></div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ── PROJECTS ── -->
-  <section id="projects" class="relative z-[1] py-[120px]">
+  <section id="projects" class="relative z-[1] py-28">
     <div class="max-w-[1100px] mx-auto px-8">
-      <div
-        class="section-label font-mono text-[.68rem] tracking-[.25em] uppercase text-accent mb-12 flex items-center gap-3">
-        Projects</div>
+      <div class="section-label text-[.7rem] tracking-[.25em] uppercase text-accent mb-14">Projects</div>
 
-      <div class="grid grid-cols-3 gap-px bg-border border border-border max-[900px]:grid-cols-1">
+      <div class="grid grid-cols-3 gap-px bg-[var(--border)] border border-[var(--border)] max-[900px]:grid-cols-1">
 
         <!-- 01 web-tool -->
         <a href="https://github.com/ArliT1-F/web-tool" target="_blank" rel="noopener"
-          class="project-card bg-surface p-9 relative overflow-hidden flex flex-col gap-5 hover:bg-[#111] reveal"
+          class="project-card bg-[var(--surface)] p-8 relative overflow-hidden flex flex-col gap-5 hover:bg-[var(--surface-hi)] reveal"
           data-repo="ArliT1-F/web-tool">
-          <div class="lazy-bg w-full h-40 rounded-lg bg-border" data-bg="img/web-tool.png"></div>
+          <div class="lazy-bg w-full h-36 rounded bg-[var(--border)]" data-bg="img/web-tool.png"></div>
           <div>
-            <div class="font-mono text-[.6rem] text-dim tracking-[.1em] mb-2.5">01 /</div>
+            <div class="font-mono text-[.6rem] text-[var(--dim)] tracking-[.12em] mb-2">01 /</div>
             <div class="flex items-start justify-between gap-3">
-              <div class="project-name font-sans text-[1.3rem] font-bold tracking-[-0.01em] transition-colors duration-150">web-tool</div>
-              <div class="project-arrow shrink-0 w-9 h-9 border border-border-hi flex items-center justify-center transition-[background,border-color,transform] duration-150">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+              <div class="project-name font-sans text-[1.25rem] font-bold tracking-[-0.01em] transition-colors duration-150">web-tool</div>
+              <div class="project-arrow shrink-0 w-8 h-8 border border-[var(--border-hi)] rounded-sm flex items-center justify-center transition-[background,border-color,transform] duration-150">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
               </div>
             </div>
           </div>
-          <p class="font-mono text-[.72rem] leading-[1.75] text-muted flex-1">WebSecScan is a modular, extensible,
-            high-performance website security auditing tool written in Python. Identifies vulnerabilities, technologies,
-            misconfigurations, phishing traits, and generates detailed shareable reports.</p>
-          <div class="repo-stats-card border border-border bg-bg p-3.5 mt-auto font-mono text-[.6rem]"
-            data-repo="ArliT1-F/web-tool">
+          <p class="font-mono text-[.72rem] leading-[1.8] text-[var(--text-secondary)] flex-1">Modular, high-performance website security auditing tool. Identifies vulnerabilities, technologies, misconfigurations, and generates detailed shareable reports.</p>
+          <div class="repo-stats-card border border-[var(--border)] bg-[var(--bg)] p-3 mt-auto font-mono text-[.6rem] rounded-sm" data-repo="ArliT1-F/web-tool">
             <div class="flex items-center gap-2 mb-2">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="#666"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-              <span class="text-[#888] tracking-[.05em]">ArliT1-F / web-tool</span>
-              <span class="ml-auto flex items-center gap-1.5 text-muted repo-lang">
-                <span class="w-2 h-2 rounded-full bg-[#f1e05a]"></span>JavaScript
-              </span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#555"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              <span class="text-[var(--muted)] tracking-[.04em]">ArliT1-F/web-tool</span>
+              <span class="ml-auto flex items-center gap-1.5 text-[var(--muted)] repo-lang"><span class="w-2 h-2 rounded-full bg-[#f1e05a]"></span>JavaScript</span>
             </div>
-            <div class="flex flex-wrap gap-x-4 gap-y-1.5 text-dim">
+            <div class="flex flex-wrap gap-x-4 gap-y-1.5 text-[var(--dim)]">
               <span class="flex items-center gap-1 repo-stat-stars"><span class="stat-skeleton"></span></span>
               <span class="flex items-center gap-1 repo-stat-forks"><span class="stat-skeleton"></span></span>
               <span class="flex items-center gap-1 repo-stat-issues"><span class="stat-skeleton"></span></span>
@@ -292,31 +253,26 @@
 
         <!-- 02 torch2grid -->
         <a href="https://github.com/ArliT1-F/torch2grid" target="_blank" rel="noopener"
-          class="project-card bg-surface p-9 relative overflow-hidden flex flex-col gap-5 hover:bg-[#111] reveal reveal-delay-1"
+          class="project-card bg-[var(--surface)] p-8 relative overflow-hidden flex flex-col gap-5 hover:bg-[var(--surface-hi)] reveal reveal-delay-1"
           data-repo="ArliT1-F/torch2grid">
-          <div class="lazy-bg w-full h-40 rounded-lg bg-border" data-bg="img/torch2grid.png"></div>
+          <div class="lazy-bg w-full h-36 rounded bg-[var(--border)]" data-bg="img/torch2grid.png"></div>
           <div>
-            <div class="font-mono text-[.6rem] text-dim tracking-[.1em] mb-2.5">02 /</div>
+            <div class="font-mono text-[.6rem] text-[var(--dim)] tracking-[.12em] mb-2">02 /</div>
             <div class="flex items-start justify-between gap-3">
-              <div class="project-name font-sans text-[1.3rem] font-bold tracking-[-0.01em] transition-colors duration-150">torch2grid</div>
-              <div class="project-arrow shrink-0 w-9 h-9 border border-border-hi flex items-center justify-center transition-[background,border-color,transform] duration-150">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+              <div class="project-name font-sans text-[1.25rem] font-bold tracking-[-0.01em] transition-colors duration-150">torch2grid</div>
+              <div class="project-arrow shrink-0 w-8 h-8 border border-[var(--border-hi)] rounded-sm flex items-center justify-center transition-[background,border-color,transform] duration-150">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
               </div>
             </div>
           </div>
-          <p class="font-mono text-[.72rem] leading-[1.75] text-muted flex-1">A lightweight Python tool for visualizing
-            PyTorch model weights and architectures. Transforms neural network parameters into intuitive visual grids —
-            inspect structure, debug weight distributions, understand layer compositions.</p>
-          <div class="repo-stats-card border border-border bg-bg p-3.5 mt-auto font-mono text-[.6rem]"
-            data-repo="ArliT1-F/torch2grid">
+          <p class="font-mono text-[.72rem] leading-[1.8] text-[var(--text-secondary)] flex-1">Lightweight tool for visualizing PyTorch model weights and architectures. Transforms neural network parameters into intuitive visual grids for inspection and debugging.</p>
+          <div class="repo-stats-card border border-[var(--border)] bg-[var(--bg)] p-3 mt-auto font-mono text-[.6rem] rounded-sm" data-repo="ArliT1-F/torch2grid">
             <div class="flex items-center gap-2 mb-2">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="#666"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-              <span class="text-[#888] tracking-[.05em]">ArliT1-F / torch2grid</span>
-              <span class="ml-auto flex items-center gap-1.5 text-muted repo-lang">
-                <span class="w-2 h-2 rounded-full bg-[#3572A5]"></span>Python
-              </span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#555"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              <span class="text-[var(--muted)] tracking-[.04em]">ArliT1-F/torch2grid</span>
+              <span class="ml-auto flex items-center gap-1.5 text-[var(--muted)] repo-lang"><span class="w-2 h-2 rounded-full bg-[#3572A5]"></span>Python</span>
             </div>
-            <div class="flex flex-wrap gap-x-4 gap-y-1.5 text-dim">
+            <div class="flex flex-wrap gap-x-4 gap-y-1.5 text-[var(--dim)]">
               <span class="flex items-center gap-1 repo-stat-stars"><span class="stat-skeleton"></span></span>
               <span class="flex items-center gap-1 repo-stat-forks"><span class="stat-skeleton"></span></span>
               <span class="flex items-center gap-1 repo-stat-issues"><span class="stat-skeleton"></span></span>
@@ -327,31 +283,26 @@
 
         <!-- 03 quantflow -->
         <a href="https://github.com/ArliT1-F/quantflow" target="_blank" rel="noopener"
-          class="project-card bg-surface p-9 relative overflow-hidden flex flex-col gap-5 hover:bg-[#111] reveal reveal-delay-2"
+          class="project-card bg-[var(--surface)] p-8 relative overflow-hidden flex flex-col gap-5 hover:bg-[var(--surface-hi)] reveal reveal-delay-2"
           data-repo="ArliT1-F/quantflow">
-          <div class="lazy-bg w-full h-40 rounded-lg bg-border" data-bg="img/quantflow.png"></div>
+          <div class="lazy-bg w-full h-36 rounded bg-[var(--border)]" data-bg="img/quantflow.png"></div>
           <div>
-            <div class="font-mono text-[.6rem] text-dim tracking-[.1em] mb-2.5">03 /</div>
+            <div class="font-mono text-[.6rem] text-[var(--dim)] tracking-[.12em] mb-2">03 /</div>
             <div class="flex items-start justify-between gap-3">
-              <div class="project-name font-sans text-[1.3rem] font-bold tracking-[-0.01em] transition-colors duration-150">quantflow</div>
-              <div class="project-arrow shrink-0 w-9 h-9 border border-border-hi flex items-center justify-center transition-[background,border-color,transform] duration-150">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
+              <div class="project-name font-sans text-[1.25rem] font-bold tracking-[-0.01em] transition-colors duration-150">quantflow</div>
+              <div class="project-arrow shrink-0 w-8 h-8 border border-[var(--border-hi)] rounded-sm flex items-center justify-center transition-[background,border-color,transform] duration-150">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
               </div>
             </div>
           </div>
-          <p class="font-mono text-[.72rem] leading-[1.75] text-muted flex-1">A sophisticated, fully functional
-            automated stock trading bot with real-time data feeds, advanced trading strategies, comprehensive risk
-            management, and a modern web dashboard.</p>
-          <div class="repo-stats-card border border-border bg-bg p-3.5 mt-auto font-mono text-[.6rem]"
-            data-repo="ArliT1-F/quantflow">
+          <p class="font-mono text-[.72rem] leading-[1.8] text-[var(--text-secondary)] flex-1">Fully functional automated stock trading bot with real-time data feeds, advanced strategies, comprehensive risk management, and a modern web dashboard.</p>
+          <div class="repo-stats-card border border-[var(--border)] bg-[var(--bg)] p-3 mt-auto font-mono text-[.6rem] rounded-sm" data-repo="ArliT1-F/quantflow">
             <div class="flex items-center gap-2 mb-2">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="#666"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-              <span class="text-[#888] tracking-[.05em]">ArliT1-F / quantflow</span>
-              <span class="ml-auto flex items-center gap-1.5 text-muted repo-lang">
-                <span class="w-2 h-2 rounded-full bg-[#3572A5]"></span>Python
-              </span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#555"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              <span class="text-[var(--muted)] tracking-[.04em]">ArliT1-F/quantflow</span>
+              <span class="ml-auto flex items-center gap-1.5 text-[var(--muted)] repo-lang"><span class="w-2 h-2 rounded-full bg-[#3572A5]"></span>Python</span>
             </div>
-            <div class="flex flex-wrap gap-x-4 gap-y-1.5 text-dim">
+            <div class="flex flex-wrap gap-x-4 gap-y-1.5 text-[var(--dim)]">
               <span class="flex items-center gap-1 repo-stat-stars"><span class="stat-skeleton"></span></span>
               <span class="flex items-center gap-1 repo-stat-forks"><span class="stat-skeleton"></span></span>
               <span class="flex items-center gap-1 repo-stat-issues"><span class="stat-skeleton"></span></span>
@@ -365,107 +316,107 @@
   </section>
 
   <!-- ── CONTACT ── -->
-  <section id="contact" class="relative z-[1] py-[120px]">
+  <section id="contact" class="relative z-[1] py-28">
     <div class="max-w-[1100px] mx-auto px-8">
-      <div
-        class="section-label font-mono text-[.68rem] tracking-[.25em] uppercase text-accent mb-12 flex items-center gap-3">
-        Connect</div>
+      <div class="section-label text-[.7rem] tracking-[.25em] uppercase text-accent mb-14">Connect</div>
 
-      <div class="grid grid-cols-3 gap-5 max-[900px]:grid-cols-1">
+      <div class="grid grid-cols-3 gap-4 max-[900px]:grid-cols-1">
 
         <!-- GitHub -->
-        <div class="social-card border border-border bg-surface overflow-hidden transition-[transform,border-color] duration-200 hover:-translate-y-1 hover:border-[#444] reveal">
-          <div class="h-[3px] bg-[#444]"></div>
-          <div class="p-6">
-            <div class="font-mono text-[.62rem] tracking-[.2em] uppercase text-[#888] mb-4 flex items-center gap-2">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="#888"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        <div class="social-card hover:border-[var(--border-hi)] reveal">
+          <div class="h-[2px] bg-[var(--dim)]"></div>
+          <div class="card-body">
+            <div class="font-mono text-[.62rem] tracking-[.18em] uppercase text-[var(--muted)] mb-5 flex items-center gap-2">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
               GitHub
             </div>
-            <div class="flex items-center gap-3.5 mb-5">
-              <img class="w-[42px] h-[42px] rounded-full object-cover border border-border-hi"
+            <div class="flex items-center gap-3.5 mb-6">
+              <img class="w-10 h-10 rounded-full object-cover border border-[var(--border-hi)]"
                 src="https://avatars.githubusercontent.com/ArliT1-F" alt="GitHub avatar" loading="lazy" decoding="async">
               <div>
-                <div class="font-sans text-[.95rem] font-bold mb-0.5">Arli Turka</div>
-                <div class="font-mono text-[.65rem] text-muted">@ArliT1-F</div>
+                <div class="font-sans text-[.92rem] font-bold mb-0.5">Arli Turka</div>
+                <div class="font-mono text-[.65rem] text-[var(--muted)]">@ArliT1-F</div>
               </div>
             </div>
-            <a href="https://github.com/ArliT1-F" target="_blank" rel="noopener"
-              class="visit-btn flex items-center justify-center gap-2 w-full py-2.5 font-mono text-[.68rem] tracking-[.1em] uppercase font-bold bg-[#24292f] text-[#f0f6fc] transition-opacity duration-150 hover:opacity-90">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-              View on GitHub
-            </a>
+            <div class="card-actions">
+              <a href="https://github.com/ArliT1-F" target="_blank" rel="noopener"
+                class="visit-btn bg-[#24292f] text-[#f0f6fc]">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                View on GitHub
+              </a>
+            </div>
           </div>
         </div>
 
         <!-- Instagram -->
-        <div class="social-card border border-border bg-surface overflow-hidden transition-[transform,border-color] duration-200 hover:-translate-y-1 hover:border-[#e1306c55] reveal reveal-delay-1">
-          <div class="h-[3px]" style="background:linear-gradient(90deg,#f09433,#dc2743,#bc1888)"></div>
-          <div class="p-6">
-            <div class="font-mono text-[.62rem] tracking-[.2em] uppercase mb-4 flex items-center gap-2 text-[#e1306c]">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="#e1306c"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        <div class="social-card hover:border-[#e1306c33] reveal reveal-delay-1">
+          <div class="h-[2px]" style="background:linear-gradient(90deg,#f09433,#dc2743,#bc1888)"></div>
+          <div class="card-body">
+            <div class="font-mono text-[.62rem] tracking-[.18em] uppercase mb-5 flex items-center gap-2 text-[#e1306c]">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
               Instagram
             </div>
-            <div class="flex items-center gap-3.5 mb-5">
-              <img class="w-[42px] h-[42px] rounded-full object-cover border border-border-hi"
-                src="https://placehold.co/84x84/1a0a10/993355?text=AT" alt="Instagram avatar" loading="lazy" decoding="async">
+            <div class="flex items-center gap-3.5 mb-6">
+              <img class="w-10 h-10 rounded-full object-cover border border-[var(--border-hi)]"
+                src="https://placehold.co/80x80/1a0a10/993355?text=AT" alt="Instagram avatar" loading="lazy" decoding="async">
               <div>
-                <div class="font-sans text-[.95rem] font-bold mb-0.5">Arli Turka</div>
-                <div class="font-mono text-[.65rem] text-muted">@a.tu2001</div>
+                <div class="font-sans text-[.92rem] font-bold mb-0.5">Arli Turka</div>
+                <div class="font-mono text-[.65rem] text-[var(--muted)]">@a.tu2001</div>
               </div>
             </div>
-            <a href="https://instagram.com/a.tu2001" target="_blank" rel="noopener"
-              class="visit-btn flex items-center justify-center gap-2 w-full py-2.5 font-mono text-[.68rem] tracking-[.1em] uppercase font-bold text-white transition-opacity duration-150 hover:opacity-90"
-              style="background:linear-gradient(90deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">
-              Follow on Instagram
-            </a>
+            <div class="card-actions">
+              <a href="https://instagram.com/a.tu2001" target="_blank" rel="noopener"
+                class="visit-btn text-white"
+                style="background:linear-gradient(90deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">
+                Follow on Instagram
+              </a>
+            </div>
           </div>
         </div>
 
-        <!-- Gmail -->
-        <div class="social-card border border-border bg-surface overflow-hidden transition-[transform,border-color] duration-200 hover:-translate-y-1 hover:border-[#ea433555] reveal reveal-delay-2">
-          <div class="h-[3px] bg-[#ea4335]"></div>
-          <div class="p-6">
-            <div class="font-mono text-[.62rem] tracking-[.2em] uppercase mb-4 flex items-center gap-2 text-[#ea4335]">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="#ea4335"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
-              Gmail
+        <!-- Email -->
+        <div class="social-card hover:border-[#ea433533] reveal reveal-delay-2">
+          <div class="h-[2px] bg-[#ea4335]"></div>
+          <div class="card-body">
+            <div class="font-mono text-[.62rem] tracking-[.18em] uppercase mb-5 flex items-center gap-2 text-[#ea4335]">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+              Email
             </div>
-            <div class="flex items-center gap-3.5 mb-5">
-              <img class="w-[42px] h-[42px] rounded-full object-cover border border-border-hi"
-                src="https://placehold.co/84x84/1a0a08/993322?text=AT" alt="Gmail avatar" loading="lazy" decoding="async">
+            <div class="flex items-center gap-3.5 mb-6">
+              <img class="w-10 h-10 rounded-full object-cover border border-[var(--border-hi)]"
+                src="https://placehold.co/80x80/1a0a08/993322?text=AT" alt="Email avatar" loading="lazy" decoding="async">
               <div>
-                <div class="font-sans text-[.95rem] font-bold mb-0.5">Arli Turka</div>
-                <div class="font-mono text-[.65rem] text-muted">arliturka@gmail.com</div>
+                <div class="font-sans text-[.92rem] font-bold mb-0.5">Arli Turka</div>
+                <div class="font-mono text-[.65rem] text-[var(--muted)]">arliturka@gmail.com</div>
               </div>
             </div>
-            <a href="mailto:arliturka@gmail.com"
-              class="visit-btn flex items-center justify-center gap-2 w-full py-2.5 font-mono text-[.68rem] tracking-[.1em] uppercase font-bold bg-[#ea4335] text-white transition-opacity duration-150 hover:opacity-90 mb-2">
-              Send Email
-            </a>
-            <button id="copy-email-btn"
-              class="btn-copy-email visit-btn flex items-center justify-center gap-2 w-full py-2.5 font-mono text-[.68rem] tracking-[.1em] uppercase font-bold bg-surface text-muted border border-border transition-colors duration-150">
-              Copy Email
-            </button>
+            <div class="card-actions flex flex-col gap-2">
+              <a href="mailto:arliturka@gmail.com"
+                class="visit-btn bg-[#ea4335] text-white">
+                Send Email
+              </a>
+              <button id="copy-email-btn"
+                class="btn-copy-email visit-btn bg-[var(--surface)] text-[var(--muted)] border border-[var(--border-hi)] transition-colors duration-150">
+                Copy Email
+              </button>
+            </div>
           </div>
         </div>
 
       </div>
 
       <!-- Contact form -->
-      <div class="contact-form-wrap reveal mt-16">
-        <div class="section-label font-mono text-[.68rem] tracking-[.25em] uppercase text-accent mb-8 flex items-center gap-3">
-          Send a Message</div>
-        <form id="contact-form" class="flex flex-col gap-3.5 max-w-[700px]">
-          <div class="grid grid-cols-2 gap-3.5 max-[640px]:grid-cols-1">
-            <input type="text" name="from_name" placeholder="Name" required class="form-input">
-            <input type="email" name="reply_to" placeholder="Email" required class="form-input">
+      <div class="contact-form-wrap reveal mt-20">
+        <div class="section-label text-[.7rem] tracking-[.25em] uppercase text-accent mb-10">Send a Message</div>
+        <form id="contact-form" class="flex flex-col gap-4 max-w-[700px]">
+          <div class="grid grid-cols-2 gap-4 max-[640px]:grid-cols-1">
+            <input type="text" name="from_name" placeholder="Your name" required class="form-input">
+            <input type="email" name="reply_to" placeholder="Your email" required class="form-input">
           </div>
-          <textarea name="message" placeholder="Message" required class="form-input form-textarea"></textarea>
-          <div class="flex items-center gap-4 flex-wrap">
-            <button type="submit"
-              class="form-submit inline-flex items-center gap-2.5 bg-accent text-black font-mono text-[.75rem] font-bold tracking-[.12em] uppercase px-7 py-3.5 transition-colors duration-150 hover:bg-white disabled:opacity-50">
-              Send Message
-            </button>
-            <span id="form-status" class="font-mono text-[.7rem] text-muted"></span>
+          <textarea name="message" placeholder="Your message..." required class="form-input form-textarea"></textarea>
+          <div class="flex items-center gap-5 flex-wrap mt-1">
+            <button type="submit" class="btn-primary form-submit disabled:opacity-50">Send Message</button>
+            <span id="form-status" class="font-mono text-[.72rem] text-[var(--muted)]"></span>
           </div>
         </form>
       </div>
@@ -474,10 +425,10 @@
   </section>
 
   <!-- ── FOOTER ── -->
-  <footer class="relative z-[1] border-t border-border py-10">
+  <footer class="relative z-[1] border-t border-[var(--border)] py-12">
     <div class="max-w-[1100px] mx-auto px-8 flex items-center justify-between">
-      <div class="font-mono text-[.65rem] text-dim tracking-[.08em]">&copy; 2025 <span class="text-accent">Arli Turka</span>.</div>
-      <div class="font-mono text-[.65rem] text-dim tracking-[.08em]">arli.vercel.app</div>
+      <div class="font-mono text-[.7rem] text-[var(--muted)] tracking-[.06em]">&copy; 2025 <span class="text-accent">Arli Turka</span></div>
+      <a href="https://arli.vercel.app" class="font-mono text-[.7rem] text-[var(--dim)] tracking-[.06em] hover:text-[var(--muted)] transition-colors">arli.vercel.app</a>
     </div>
   </footer>
 
