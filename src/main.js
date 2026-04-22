@@ -93,6 +93,7 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el))
    ACTIVE NAV LINK
 ============================================================ */
 const navAnchors = document.querySelectorAll('.nav-link')
+const navSectionIds = Array.from(navAnchors).map(a => a.hash.slice(1))
 const sectionObserver = new IntersectionObserver(entries => {
   for (let i = 0; i < entries.length; i++) {
     if (entries[i].isIntersecting) {
@@ -103,7 +104,9 @@ const sectionObserver = new IntersectionObserver(entries => {
     }
   }
 }, { threshold: 0.35 })
-document.querySelectorAll('section[id]').forEach(s => sectionObserver.observe(s))
+document.querySelectorAll('section[id]').forEach(s => {
+  if (navSectionIds.includes(s.id)) sectionObserver.observe(s)
+})
 
 /* ============================================================
    MINIMAL PARTICLE CANVAS — only in hero, 20fps, few particles
