@@ -4,6 +4,8 @@ import { injectSpeedInsights } from '@vercel/speed-insights'
 injectSpeedInsights()
 
 const isTouchDevice = matchMedia('(hover: none)').matches
+const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches
+const EMAIL = 'arliturka@gmail.com'
 
 /* ============================================================
    CUSTOM CURSOR — pauses when mouse stops moving
@@ -53,28 +55,60 @@ if (isTouchDevice) {
 }
 
 /* ============================================================
-   NAV SCROLL STATE
+   SCROLL — nav state, progress bar, back-to-top (one listener)
 ============================================================ */
-const nav = document.getElementById('nav')
-let lastScrolled = false
-window.addEventListener('scroll', () => {
-  const scrolled = window.scrollY > 30
-  if (scrolled !== lastScrolled) {
-    lastScrolled = scrolled
-    nav.classList.toggle('nav-scrolled', scrolled)
-  }
-}, { passive: true })
+const nav       = document.getElementById('nav')
+const progress  = document.getElementById('scroll-progress')
+const backTop   = document.getElementById('back-top')
+let navScrolled = false
+let scrollRaf   = 0
+
+function onScroll() {
+  if (scrollRaf) return
+  scrollRaf = requestAnimationFrame(() => {
+    scrollRaf = 0
+    const y = window.scrollY
+    const docH = document.documentElement.scrollHeight - innerHeight
+    if (progress) progress.style.width = (docH > 0 ? (y / docH) * 100 : 0) + '%'
+    if (backTop) backTop.classList.toggle('show', y > 600)
+    const scrolled = y > 30
+    if (scrolled !== navScrolled) {
+      navScrolled = scrolled
+      nav.classList.toggle('nav-scrolled', scrolled)
+    }
+  })
+}
+window.addEventListener('scroll', onScroll, { passive: true })
+onScroll()
+
+if (backTop) {
+  backTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' })
+  })
+}
 
 /* ============================================================
-   HAMBURGER
+   HAMBURGER — close on link click, Escape, or outside click
 ============================================================ */
 const hamburger = document.getElementById('hamburger')
 const navLinks  = document.getElementById('nav-links')
 
-hamburger.addEventListener('click', () => navLinks.classList.toggle('active'))
-navLinks.addEventListener('click', e => {
-  if (e.target.tagName === 'A') navLinks.classList.remove('active')
+function closeMenu() {
+  navLinks.classList.remove('active')
+  hamburger.setAttribute('aria-expanded', 'false')
+}
+hamburger.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('active')
+  hamburger.setAttribute('aria-expanded', String(open))
 })
+navLinks.addEventListener('click', e => {
+  if (e.target.tagName === 'A') closeMenu()
+})
+document.addEventListener('click', e => {
+  if (navLinks.classList.contains('active') &&
+      !navLinks.contains(e.target) && !hamburger.contains(e.target)) closeMenu()
+})
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu() })
 
 /* ============================================================
    SCROLL REVEAL — single shared observer
@@ -108,67 +142,70 @@ document.querySelectorAll('section[id]').forEach(s => sectionObserver.observe(s)
 /* ============================================================
    MINIMAL PARTICLE CANVAS — only in hero, 20fps, few particles
 ============================================================ */
-const canvas = document.getElementById('particles')
-const ctx = canvas.getContext('2d', { alpha: true })
-let cW, cH
+if (!prefersReduced) {
+  const canvas = document.getElementById('particles')
+  const ctx = canvas.getContext('2d', { alpha: true })
+  let cW, cH
 
-function resizeCanvas() {
-  cW = canvas.width  = canvas.offsetWidth
-  cH = canvas.height = canvas.offsetHeight
-}
-resizeCanvas()
+  function resizeCanvas() {
+    cW = canvas.width  = canvas.offsetWidth
+    cH = canvas.height = canvas.offsetHeight
+  }
+  resizeCanvas()
 
-const dpr = Math.min(devicePixelRatio, 1)
-const PARTICLE_COUNT = Math.min(40, Math.round(innerWidth / 30))
+  const PARTICLE_COUNT = Math.min(40, Math.round(innerWidth / 30))
 
-const px = new Float32Array(PARTICLE_COUNT)
-const py = new Float32Array(PARTICLE_COUNT)
-const ps = new Float32Array(PARTICLE_COUNT)
-const pvx = new Float32Array(PARTICLE_COUNT)
-const pvy = new Float32Array(PARTICLE_COUNT)
+  const px = new Float32Array(PARTICLE_COUNT)
+  const py = new Float32Array(PARTICLE_COUNT)
+  const ps = new Float32Array(PARTICLE_COUNT)
+  const pvx = new Float32Array(PARTICLE_COUNT)
+  const pvy = new Float32Array(PARTICLE_COUNT)
 
-for (let i = 0; i < PARTICLE_COUNT; i++) {
-  px[i]  = Math.random() * cW
-  py[i]  = Math.random() * cH
-  ps[i]  = Math.random() * 1.8 + 0.4
-  pvx[i] = Math.random() * 0.4 - 0.2
-  pvy[i] = Math.random() * 0.3 + 0.05
-}
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
+    px[i]  = Math.random() * cW
+    py[i]  = Math.random() * cH
+    ps[i]  = Math.random() * 1.8 + 0.4
+    pvx[i] = Math.random() * 0.4 - 0.2
+    pvy[i] = Math.random() * 0.3 + 0.05
+  }
 
-let animPaused = false
-let heroVisible = true
+  let animPaused = false
+  let heroVisible = true
 
-document.addEventListener('visibilitychange', () => { animPaused = document.hidden })
+  document.addEventListener('visibilitychange', () => { animPaused = document.hidden })
 
-new IntersectionObserver(entries => {
-  heroVisible = entries[0].isIntersecting
-}, { threshold: 0 }).observe(document.getElementById('hero'))
+  new IntersectionObserver(entries => {
+    heroVisible = entries[0].isIntersecting
+  }, { threshold: 0 }).observe(document.getElementById('hero'))
 
-let resizeTimer
-window.addEventListener('resize', () => {
-  clearTimeout(resizeTimer)
-  resizeTimer = setTimeout(resizeCanvas, 200)
-}, { passive: true })
+  let resizeTimer
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer)
+    resizeTimer = setTimeout(resizeCanvas, 200)
+  }, { passive: true })
 
-const FRAME_MS = 1000 / 20
-let lastFrame = 0
+  const FRAME_MS = 1000 / 20
+  let lastFrame = 0
 
-function loop(now) {
-  if (!animPaused && heroVisible && now - lastFrame >= FRAME_MS) {
-    lastFrame = now
-    ctx.clearRect(0, 0, cW, cH)
-    ctx.fillStyle = '#c8ff00'
-    ctx.globalAlpha = 0.4
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      px[i] += pvx[i]; py[i] += pvy[i]
-      if (px[i] < 0 || px[i] > cW) pvx[i] = -pvx[i]
-      if (py[i] < 0 || py[i] > cH) pvy[i] = -pvy[i]
-      ctx.fillRect(px[i], py[i], ps[i], ps[i])
+  function loop(now) {
+    if (!animPaused && heroVisible && now - lastFrame >= FRAME_MS) {
+      lastFrame = now
+      ctx.clearRect(0, 0, cW, cH)
+      ctx.fillStyle = '#c8ff00'
+      ctx.globalAlpha = 0.4
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        px[i] += pvx[i]; py[i] += pvy[i]
+        if (px[i] < 0 || px[i] > cW) pvx[i] = -pvx[i]
+        if (py[i] < 0 || py[i] > cH) pvy[i] = -pvy[i]
+        ctx.fillRect(px[i], py[i], ps[i], ps[i])
+      }
     }
+    requestAnimationFrame(loop)
   }
   requestAnimationFrame(loop)
+} else {
+  document.getElementById('particles')?.remove()
 }
-requestAnimationFrame(loop)
 
 /* ============================================================
    SKILL BARS
@@ -188,42 +225,47 @@ if (skillsSection) {
 }
 
 /* ============================================================
-   SPLASH — instant dismiss
+   SPLASH — instant dismiss (with safety timeout)
 ============================================================ */
 const splash = document.getElementById('splash')
 if (splash) {
   requestAnimationFrame(() => {
     splash.classList.add('splash-out')
     splash.addEventListener('transitionend', () => splash.remove(), { once: true })
+    setTimeout(() => splash.remove(), 2500)
   })
 }
 
 /* ============================================================
-   TYPEWRITER — immediate start
+   TYPEWRITER — immediate start (instant text if reduced motion)
 ============================================================ */
 const subtitleEl = document.querySelector('.hero-subtitle')
 if (subtitleEl) {
   const text = 'Systems programmer & full-stack builder.\nC \u00b7 Python \u00b7 Low-level systems \u00b7 ML tooling'
-  subtitleEl.textContent = ''
-  let i = 0
-  function type() {
-    if (i < text.length) {
-      if (text[i] === '\n') {
-        subtitleEl.appendChild(document.createElement('br'))
-      } else {
-        subtitleEl.appendChild(document.createTextNode(text[i]))
+  if (prefersReduced) {
+    subtitleEl.innerHTML = text.replace(/\n/g, '<br>')
+  } else {
+    subtitleEl.textContent = ''
+    let i = 0
+    function type() {
+      if (i < text.length) {
+        if (text[i] === '\n') {
+          subtitleEl.appendChild(document.createElement('br'))
+        } else {
+          subtitleEl.appendChild(document.createTextNode(text[i]))
+        }
+        i++
+        setTimeout(type, 20)
       }
-      i++
-      setTimeout(type, 20)
     }
+    setTimeout(type, 400)
   }
-  setTimeout(type, 400)
 }
 
 /* ============================================================
    PROJECT CARD TILT — lightweight
 ============================================================ */
-if (!isTouchDevice) {
+if (!isTouchDevice && !prefersReduced) {
   document.querySelectorAll('.project-card').forEach(card => {
     let raf = 0
     card.addEventListener('mousemove', e => {
@@ -267,7 +309,7 @@ const ICON = {
   issue: '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
   clock: '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
 }
-const LANG_COLORS = { JavaScript:'#f1e05a', Python:'#3572A5', C:'#555599', TypeScript:'#2b7489', HTML:'#e34c26', CSS:'#563d7c', Shell:'#89e051' }
+const LANG_COLORS = { JavaScript:'#f1e05a', Python:'#3572A5', C:'#555599', TypeScript:'#2b7489', HTML:'#e34c26', CSS:'#563d7c', Shell:'#89e051', Rust:'#dea584', GDScript:'#478cbf', PHP:'#4f5d95', Java:'#b07219' }
 const CACHE_TTL = 10 * 60 * 1000
 
 function timeAgo(d) {
@@ -287,6 +329,14 @@ function cache(k, v) {
   try { sessionStorage.setItem(k, JSON.stringify({ d: v, t: Date.now() })) } catch {}
 }
 
+/* Graceful offline state — stop the skeleton pulse, show a dim dash */
+function failStats(el) {
+  el.querySelectorAll('.stat-skeleton').forEach(s => {
+    s.classList.remove('stat-skeleton')
+    s.classList.add('stat-fallback')
+  })
+}
+
 async function fetchRepo(slug, el) {
   try {
     let d = cache('gh_' + slug)
@@ -295,7 +345,8 @@ async function fetchRepo(slug, el) {
         fetch('https://api.github.com/repos/' + slug),
         fetch('https://api.github.com/repos/' + slug + '/commits?per_page=1')
       ])
-      const repo = await r1.json(), commits = await r2.json()
+      if (!r1.ok) throw new Error('repo ' + r1.status)
+      const repo = await r1.json(), commits = r2.ok ? await r2.json() : []
       d = { s: repo.stargazers_count||0, f: repo.forks_count||0, i: repo.open_issues_count||0, l: repo.language||'', c: commits[0]?.commit?.author?.date }
       cache('gh_' + slug, d)
     }
@@ -307,7 +358,7 @@ async function fetchRepo(slug, el) {
       const s = el.querySelector('.repo-stat-' + k)
       if (s) { if (v) s.innerHTML = v; else s.remove() }
     }
-  } catch {}
+  } catch { failStats(el) }
 }
 
 document.querySelectorAll('.repo-stats-card').forEach(el => {
@@ -316,19 +367,39 @@ document.querySelectorAll('.repo-stats-card').forEach(el => {
 })
 
 /* ============================================================
-   EMAILJS CONTACT FORM
+   EMAILJS CONTACT FORM — mailto fallback when unconfigured
 ============================================================ */
 const contactForm = document.getElementById('contact-form')
 if (contactForm) {
+  const serviceId  = 'YOUR_SERVICE_ID'
+  const templateId = 'YOUR_TEMPLATE_ID'
+  const emailjsConfigured =
+    typeof window.emailjs !== 'undefined' &&
+    !serviceId.includes('YOUR_') && !templateId.includes('YOUR_')
+
   contactForm.addEventListener('submit', async e => {
     e.preventDefault()
     const status = document.getElementById('form-status')
     const btn = contactForm.querySelector('.form-submit')
-    status.textContent = 'Sending...'
+    const els = contactForm.elements
+    const name = (els.namedItem('from_name')?.value || '').trim() || 'Anonymous'
+    const replyTo = (els.namedItem('reply_to')?.value || '').trim()
+    const message = (els.namedItem('message')?.value || '').trim()
     status.style.color = '#555'
+
+    if (!emailjsConfigured) {
+      // Fallback: open the visitor's mail client with everything prefilled
+      const subject = encodeURIComponent('Portfolio contact from ' + name)
+      const body = encodeURIComponent(message + '\n\n\u2014 ' + name + (replyTo ? ' <' + replyTo + '>' : ''))
+      status.textContent = '\u2192 Opening your mail app\u2026'
+      window.location.href = 'mailto:' + EMAIL + '?subject=' + subject + '&body=' + body
+      return
+    }
+
+    status.textContent = 'Sending...'
     btn.disabled = true
     try {
-      await emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', contactForm)
+      await emailjs.sendForm(serviceId, templateId, contactForm)
       status.textContent = '\u2713 Message sent!'
       status.style.color = '#c8ff00'
       contactForm.reset()
@@ -340,17 +411,57 @@ if (contactForm) {
 }
 
 /* ============================================================
-   COPY EMAIL
+   COPY EMAIL — clipboard API with legacy fallback
 ============================================================ */
 const copyBtn = document.getElementById('copy-email-btn')
 if (copyBtn) {
-  copyBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText('arliturka@gmail.com').then(() => {
+  copyBtn.addEventListener('click', async () => {
+    const flash = () => {
       copyBtn.textContent = '\u2713 Copied!'
       copyBtn.classList.add('copied')
       setTimeout(() => { copyBtn.textContent = 'Copy Email'; copyBtn.classList.remove('copied') }, 2000)
-    })
+    }
+    try {
+      await navigator.clipboard.writeText(EMAIL)
+      flash()
+    } catch {
+      const ta = document.createElement('textarea')
+      ta.value = EMAIL
+      ta.style.position = 'fixed'
+      ta.style.opacity = '0'
+      document.body.appendChild(ta)
+      ta.select()
+      try { document.execCommand('copy'); flash() } catch {}
+      ta.remove()
+    }
   })
+}
+
+/* ============================================================
+   RESUME — hide CTA if resume.pdf is not deployed
+============================================================ */
+const resumeCta = document.getElementById('resume-cta')
+if (resumeCta) {
+  fetch('resume.pdf', { method: 'HEAD' })
+    .then(r => {
+      // Some dev servers SPA-fallback to 200 + text/html for missing files
+      const ct = r.headers.get('content-type') || ''
+      if (!r.ok || ct.includes('html')) resumeCta.remove()
+    })
+    .catch(() => resumeCta.remove())
+}
+
+/* ============================================================
+   FOOTER — dynamic year + live system clock
+============================================================ */
+const yearEl = document.getElementById('year')
+if (yearEl) yearEl.textContent = new Date().getFullYear()
+
+const timeEl = document.getElementById('sys-time')
+if (timeEl) {
+  const tick = () => { timeEl.textContent = new Date().toLocaleTimeString('en-GB', { hour12: false }) }
+  tick()
+  setInterval(tick, 1000)
 }
 
 /* ============================================================
