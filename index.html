@@ -11,6 +11,7 @@
     content="Arli Turka, systems programmer, C developer, Python developer, PyTorch, low-level programming, automation, quantflow">
   <meta name="author" content="Arli Turka">
   <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#080808">
   <link rel="canonical" href="https://arli.vercel.app">
 
   <meta property="og:title" content="Arli Turka | Systems Programmer &amp; Full-Stack Builder">
@@ -32,6 +33,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://api.github.com">
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="preload" as="image" href="/img/me.jpeg">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap">
 
   <script type="application/ld+json">
   {
@@ -65,17 +69,20 @@
   </div>
 
   <!-- Side neons -->
-  <div class="side-neon">コード構築者</div>
-  <div class="side-neon-right">ネオン東京</div>
+  <div class="side-neon" aria-hidden="true">コード構築者</div>
+  <div class="side-neon-right" aria-hidden="true">ネオン東京</div>
+
+  <!-- Scroll progress -->
+  <div id="scroll-progress" aria-hidden="true"></div>
 
   <!-- Custom cursor -->
-  <div id="cursor-dot"
+  <div id="cursor-dot" aria-hidden="true"
     class="fixed w-[6px] h-[6px] bg-accent rounded-full pointer-events-none z-[9999]"></div>
-  <div id="cursor-ring"
+  <div id="cursor-ring" aria-hidden="true"
     class="fixed w-[30px] h-[30px] border border-accent rounded-full pointer-events-none z-[9999] transition-[width,height,opacity] duration-150"></div>
 
   <!-- Static grid -->
-  <div class="grid-bg"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
 
   <!-- ── NAVIGATION ── -->
   <nav id="nav"
@@ -93,14 +100,17 @@
             class="nav-link font-mono text-[.72rem] tracking-[.12em] uppercase text-muted hover:text-[#e8e8e8] transition-colors relative">Contact</a>
         </li>
       </ul>
-      <div id="hamburger" class="hamburger hidden font-mono text-[1.8rem] text-accent p-2">&#9776;</div>
+      <button id="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false"
+        aria-controls="nav-links"
+        class="hamburger hidden font-mono text-[1.8rem] text-accent p-2 leading-none">&#9776;</button>
     </div>
   </nav>
 
   <!-- ── HERO ── -->
   <section id="hero" class="relative z-[1] min-h-screen flex items-center pt-20">
-    <canvas id="particles" class="absolute inset-0 z-[1] pointer-events-none opacity-60"></canvas>
-    <div class="scanlines"></div>
+    <canvas id="particles" aria-hidden="true"
+      class="absolute inset-0 z-[1] pointer-events-none opacity-60"></canvas>
+    <div class="scanlines" aria-hidden="true"></div>
     <div class="max-w-[1100px] mx-auto px-8 w-full">
       <div class="grid grid-cols-[1fr_auto] gap-16 items-center w-full max-[900px]:grid-cols-1">
 
@@ -130,7 +140,7 @@
               class="hero-cta inline-flex items-center gap-2.5 bg-transparent text-accent font-mono text-[.75rem] font-bold tracking-[.12em] uppercase px-7 py-3.5 border border-accent transition-colors duration-150 hover:bg-accent hover:text-black">
               GitHub
             </a>
-            <a href="resume.pdf" download="Arli_Turka_Resume.pdf"
+            <a id="resume-cta" href="resume.pdf" download="Arli_Turka_Resume.pdf"
               class="hero-cta inline-flex items-center gap-2.5 bg-transparent text-accent font-mono text-[.75rem] font-bold tracking-[.12em] uppercase px-7 py-3.5 border border-accent transition-colors duration-150 hover:bg-accent hover:text-black">
               &darr; Resume
             </a>
@@ -141,9 +151,9 @@
         <div class="hero-avatar relative max-[900px]:hidden">
           <div class="avatar-ring"></div>
           <div class="w-[220px] h-[220px] rounded-full overflow-hidden border border-border-hi relative z-[1]">
-            <img id="pfp" src="https://placehold.co/400x400/111/555?text=AT" alt="Arli Turka"
+            <img id="pfp" src="/img/me.jpeg" alt="Arli Turka" width="400" height="400"
               class="w-full h-full object-cover object-top grayscale-[20%] transition-[filter] duration-300 hover:grayscale-0"
-              loading="lazy" decoding="async">
+              fetchpriority="high" decoding="async">
           </div>
         </div>
 
@@ -278,7 +288,7 @@
               <svg width="13" height="13" viewBox="0 0 24 24" fill="#666"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
               <span class="text-[#888] tracking-[.05em]">ArliT1-F / web-tool</span>
               <span class="ml-auto flex items-center gap-1.5 text-muted repo-lang">
-                <span class="w-2 h-2 rounded-full bg-[#f1e05a]"></span>JavaScript
+                <span class="w-2 h-2 rounded-full bg-[#3572A5]"></span>Python
               </span>
             </div>
             <div class="flex flex-wrap gap-x-4 gap-y-1.5 text-dim">
@@ -407,7 +417,8 @@
             </div>
             <div class="flex items-center gap-3.5 mb-5">
               <img class="w-[42px] h-[42px] rounded-full object-cover border border-border-hi"
-                src="https://placehold.co/84x84/1a0a10/993355?text=AT" alt="Instagram avatar" loading="lazy" decoding="async">
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84'%3E%3Crect width='84' height='84' rx='42' fill='%231a0a10'/%3E%3Ctext x='50%25' y='53%25' font-family='monospace' font-weight='700' font-size='26' fill='%23993355' text-anchor='middle' dominant-baseline='middle'%3EAT%3C/text%3E%3C/svg%3E"
+                alt="Instagram avatar" width="84" height="84" decoding="async">
               <div>
                 <div class="font-sans text-[.95rem] font-bold mb-0.5">Arli Turka</div>
                 <div class="font-mono text-[.65rem] text-muted">@a.tu2001</div>
@@ -431,7 +442,8 @@
             </div>
             <div class="flex items-center gap-3.5 mb-5">
               <img class="w-[42px] h-[42px] rounded-full object-cover border border-border-hi"
-                src="https://placehold.co/84x84/1a0a08/993322?text=AT" alt="Gmail avatar" loading="lazy" decoding="async">
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84'%3E%3Crect width='84' height='84' rx='42' fill='%231a0a08'/%3E%3Ctext x='50%25' y='53%25' font-family='monospace' font-weight='700' font-size='26' fill='%23993322' text-anchor='middle' dominant-baseline='middle'%3EAT%3C/text%3E%3C/svg%3E"
+                alt="Gmail avatar" width="84" height="84" decoding="async">
               <div>
                 <div class="font-sans text-[.95rem] font-bold mb-0.5">Arli Turka</div>
                 <div class="font-mono text-[.65rem] text-muted">arliturka@gmail.com</div>
@@ -456,16 +468,19 @@
           Send a Message</div>
         <form id="contact-form" class="flex flex-col gap-3.5 max-w-[700px]">
           <div class="grid grid-cols-2 gap-3.5 max-[640px]:grid-cols-1">
-            <input type="text" name="from_name" placeholder="Name" required class="form-input">
-            <input type="email" name="reply_to" placeholder="Email" required class="form-input">
+            <input type="text" name="from_name" placeholder="Name" required aria-label="Your name"
+              autocomplete="name" maxlength="100" class="form-input">
+            <input type="email" name="reply_to" placeholder="Email" required aria-label="Your email address"
+              autocomplete="email" maxlength="200" class="form-input">
           </div>
-          <textarea name="message" placeholder="Message" required class="form-input form-textarea"></textarea>
+          <textarea name="message" placeholder="Message" required aria-label="Your message" maxlength="5000"
+            class="form-input form-textarea"></textarea>
           <div class="flex items-center gap-4 flex-wrap">
             <button type="submit"
               class="form-submit inline-flex items-center gap-2.5 bg-accent text-black font-mono text-[.75rem] font-bold tracking-[.12em] uppercase px-7 py-3.5 transition-colors duration-150 hover:bg-white disabled:opacity-50">
               Send Message
             </button>
-            <span id="form-status" class="font-mono text-[.7rem] text-muted"></span>
+            <span id="form-status" role="status" aria-live="polite" class="font-mono text-[.7rem] text-muted"></span>
           </div>
         </form>
       </div>
@@ -473,11 +488,17 @@
     </div>
   </section>
 
+  <!-- Back to top -->
+  <button id="back-top" type="button" aria-label="Back to top">&uarr;</button>
+
   <!-- ── FOOTER ── -->
   <footer class="relative z-[1] border-t border-border py-10">
-    <div class="max-w-[1100px] mx-auto px-8 flex items-center justify-between">
-      <div class="font-mono text-[.65rem] text-dim tracking-[.08em]">&copy; 2025 <span class="text-accent">Arli Turka</span>.</div>
+    <div class="max-w-[1100px] mx-auto px-8 flex items-center justify-between gap-4">
+      <div class="font-mono text-[.65rem] text-dim tracking-[.08em]">&copy; <span id="year">2026</span> <span class="text-accent">Arli Turka</span>.</div>
       <div class="font-mono text-[.65rem] text-dim tracking-[.08em]">arli.vercel.app</div>
+      <div class="font-mono text-[.65rem] text-dim tracking-[.08em]" aria-label="Local time">
+        <span class="text-muted">SYS.TIME</span> <span id="sys-time">--:--:--</span>
+      </div>
     </div>
   </footer>
 
